@@ -1,0 +1,858 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>보금이의 방 대변신</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap">
+<style>
+/* 보금이의 방 대변신 — 교과서 96~97쪽 (공간 활용 · 가구 배치 · 정리와 수납) */
+:root{
+  --bg:#FFF5EA; --card:#FFFFFF; --ink:#33302C; --muted:#6A625A; --line:#3A3A3A;
+  --mint:#9FDBC4; --mint-deep:#2F7D5E; --coral:#F28B82; --yellow:#FFD95E;
+  --peach:#FCE3CF; --wood-deep:#A9734A; --sky:#CFE3F7; --lav:#E6DAF5; --pink:#FAD3DC;
+  --ok:#23885A; --ok-bg:#E3F5EC; --bad:#C8463F; --bad-bg:#FCE9E7;
+  --display:'Jua','Gowun Dodum','Malgun Gothic',sans-serif;
+  --body:'Gowun Dodum','Malgun Gothic','Apple SD Gothic Neo',sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--ink);margin:0}
+body{font-family:var(--body);font-size:17px;line-height:1.6;
+  background-image:radial-gradient(circle at 12% 8%,#FFE7CF 0,transparent 32%),radial-gradient(circle at 92% 30%,#FDE6EC 0,transparent 28%);
+  padding:16px max(16px,env(safe-area-inset-right,0px)) 48px max(16px,env(safe-area-inset-left,0px))}
+.wrap{max-width:800px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+h1,h2,h3,.disp{font-family:var(--display);font-weight:400;letter-spacing:.01em;margin:0;text-wrap:balance}
+h1{font-size:2.2rem;line-height:1.2} h2{font-size:1.55rem;line-height:1.25}
+p{margin:0}
+.card{background:var(--card);border:3px solid var(--line);border-radius:22px;padding:20px;display:flex;flex-direction:column;gap:14px;box-shadow:0 6px 0 rgba(58,58,58,.12)}
+.muted{color:var(--muted)}
+.tag{display:inline-block;font-family:var(--display);font-size:.95rem;padding:2px 12px;border-radius:999px;border:2px solid var(--line);background:var(--yellow)}
+button{font:inherit;cursor:pointer;color:var(--ink)}
+.btn{font-family:var(--display);font-size:1.25rem;padding:12px 22px;border-radius:16px;border:3px solid var(--line);background:var(--mint);box-shadow:0 4px 0 var(--line);transition:transform .08s}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--line)}
+.btn.sec{background:#fff} .btn.warm{background:var(--yellow)} .btn.small{font-size:1.05rem;padding:8px 14px;border-radius:12px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+button:focus-visible,input:focus-visible{outline:4px solid var(--coral);outline-offset:2px}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.top{display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap}
+.who{font-family:var(--display);font-size:1rem;background:#fff;border:2px solid var(--line);border-radius:999px;padding:4px 14px}
+.bogeum{width:120px;height:auto;flex:none}
+.say{display:flex;gap:14px;align-items:center}
+.bubble{position:relative;background:#fff;border:3px solid var(--line);border-radius:18px;padding:12px 16px;font-size:1.05rem}
+.bubble::before{content:"";position:absolute;left:-12px;top:50%;width:18px;height:18px;background:#fff;border-left:3px solid var(--line);border-bottom:3px solid var(--line);transform:translateY(-50%) rotate(45deg)}
+.hero{text-align:center;align-items:center;background:linear-gradient(180deg,#FFE9D2,#fff 70%)}
+.heroart{width:100%;max-width:440px}
+.heroart svg{width:100%;height:auto;border-radius:18px;border:3px solid var(--line);display:block}
+.fields{display:grid;grid-template-columns:1fr 1fr 2fr;gap:10px;width:100%}
+.fields label{display:flex;flex-direction:column;gap:4px;font-family:var(--display);font-size:1rem;text-align:left}
+input{font:inherit;font-size:1.1rem;padding:10px 12px;border:3px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);width:100%;min-width:0}
+/* 미션 목록 */
+.missions{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.mission{position:relative;text-align:left;display:flex;flex-direction:column;gap:6px;padding:16px;border:3px solid var(--line);border-radius:22px;background:#fff;box-shadow:0 5px 0 var(--line)}
+.mission .num{font-family:var(--display);font-size:.95rem;color:var(--muted)}
+.mission .mt{font-family:var(--display);font-size:1.35rem;line-height:1.2}
+.mission .mp{font-size:.95rem;color:var(--muted)}
+.mission .stars{font-size:1.2rem;letter-spacing:2px;color:#E0A100;min-height:1.4em}
+.mission.done::after{content:"완료";position:absolute;right:12px;top:12px;font-family:var(--display);font-size:.95rem;background:var(--ok);color:#fff;border-radius:999px;padding:2px 10px;transform:rotate(6deg)}
+.mission.locked{opacity:.5;box-shadow:none}
+.m1{background:var(--pink)} .m2{background:var(--peach)} .m3{background:var(--sky)} .m4{background:var(--lav)}
+.steps{display:flex;gap:6px} .steps span{flex:1;height:8px;border-radius:99px;background:#EADCCB} .steps span.on{background:var(--wood-deep)}
+/* 미션1 */
+.defs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.def{border:2px solid var(--line);border-radius:14px;padding:10px 12px;font-size:.98rem;line-height:1.45}
+.def b{font-family:var(--display);font-weight:400;font-size:1.1rem;display:block}
+.def.a{background:var(--pink)} .def.b{background:#FFF1BF}
+.scard{display:flex;flex-direction:column;gap:12px;background:#FFFCF7;border:3px solid var(--line);border-radius:20px;padding:14px}
+.scard svg{width:100%;max-width:460px;margin:0 auto;height:auto;border-radius:14px;border:2px solid var(--line);display:block}
+.scard .txt{font-size:1.2rem;font-weight:700;line-height:1.5}
+.choice2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.choice2 .btn{font-size:1.3rem;padding:16px 10px}
+.choice2 .btn.a{background:var(--pink)} .choice2 .btn.b{background:#FFF1BF}
+.combo{font-family:var(--display);font-size:1rem;padding:2px 12px;border-radius:999px;border:2px solid var(--line);background:#fff}
+.combo.hot{background:linear-gradient(90deg,#FFD95E,#F28B82);color:#3A2A00;animation:pop .35s}
+.fb{border-radius:14px;padding:12px 14px;font-size:1.02rem;line-height:1.5;border:2px solid}
+.fb.ok{background:var(--ok-bg);border-color:var(--ok)} .fb.no{background:var(--bad-bg);border-color:var(--bad)}
+.fb b{font-family:var(--display);font-weight:400;font-size:1.15rem}
+/* 방 */
+.m2grid{display:grid;grid-template-columns:minmax(0,1fr) 210px;gap:16px;align-items:start}
+.roomwrap{--p:16px;position:relative;padding:var(--p);background:linear-gradient(135deg,#7A685A,#5E4F44);border-radius:12px;width:100%;max-width:540px;margin:0 auto;box-shadow:0 6px 0 rgba(0,0,0,.15)}
+.floor{position:relative;display:grid;overflow:hidden;
+  background-color:#F1DCBD;
+  background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.18) 0 2px,transparent 2px 46px),repeating-linear-gradient(0deg,transparent 0 30px,rgba(150,105,60,.16) 30px 32px)}
+.light{position:absolute;pointer-events:none}
+.cell{border:1px dashed rgba(120,90,60,.22);background:transparent;padding:0;margin:0}
+.cell.swing{background:rgba(242,139,130,.13)}
+.cell.hit{background:rgba(200,70,63,.35)!important}
+.overlay{position:absolute;inset:0;pointer-events:none;width:100%;height:100%}
+.piece{position:absolute;padding:3px;border:none;background:none}
+.piece svg{width:100%;height:100%;display:block;overflow:visible}
+.piece.sel svg{outline:4px solid var(--coral);outline-offset:1px;border-radius:8px}
+.piece.bad svg{outline:4px solid var(--bad);outline-offset:1px;border-radius:8px;animation:shake .4s}
+.piece.fixed::after{content:"✓";position:absolute;right:-4px;top:-6px;width:24px;height:24px;border-radius:50%;background:var(--ok);color:#fff;font-size:.9rem;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+.wallmark{position:absolute;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:.72rem;line-height:1;overflow:hidden;pointer-events:none}
+.wm-win{background:linear-gradient(90deg,#BFE3F7,#86C6EA);border:2px solid #fff;color:#1F4E6B}
+.wm-door{background:#F1DCBD;color:#8C5B36}
+.wm-sw{background:#FFD95E;color:#3A3A3A;border:2px solid #fff}
+.wm-out{background:#fff;color:#3A3A3A;border:2px solid #FFD95E}
+.tray{display:flex;flex-direction:column;gap:10px}
+.titem{display:flex;gap:10px;align-items:center;text-align:left;padding:8px 10px;border:3px solid var(--line);border-radius:14px;background:#fff;box-shadow:0 3px 0 var(--line)}
+.titem svg{width:58px;height:46px;flex:none}
+.titem .tn{font-family:var(--display);font-size:1.1rem;line-height:1.1}
+.titem .ts{font-size:.82rem;color:var(--muted);line-height:1.3}
+.titem.sel{background:var(--yellow)}
+.titem.used{opacity:.4;box-shadow:none}
+.mini{display:inline-block;font-size:.75rem;font-family:var(--display);padding:0 6px;border-radius:6px;border:1.5px solid var(--line);margin-right:3px}
+.mini.tall{background:#D9E8F7}
+.rules{display:flex;flex-direction:column;gap:8px}
+.rule{display:flex;gap:10px;align-items:flex-start;padding:8px 12px;border:2px solid var(--line);border-radius:12px;background:#fff;font-size:.98rem;line-height:1.4}
+.rule .ic{font-family:var(--display);flex:none;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid var(--line);background:#fff;font-size:.9rem}
+.rule.ok{background:var(--ok-bg);border-color:var(--ok)} .rule.ok .ic{background:var(--ok);color:#fff;border-color:var(--ok)}
+.rule.no{background:var(--bad-bg);border-color:var(--bad)} .rule.no .ic{background:var(--bad);color:#fff;border-color:var(--bad)}
+.rule small{display:block;color:var(--muted);font-size:.88rem}
+.ctrl{display:flex;gap:8px;flex-wrap:wrap}
+/* 선반 */
+.m3grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+.shelfwrap{display:flex;gap:8px;align-items:stretch}
+.shelf{flex:1;display:flex;flex-direction:column;border:5px solid #9A6640;border-radius:12px;background:linear-gradient(180deg,#E9C79C,#D6A877);padding:5px;box-shadow:inset 0 0 0 2px rgba(255,255,255,.25),0 5px 0 rgba(0,0,0,.15)}
+.lvl{position:relative;min-height:92px;border:none;border-bottom:8px solid #9A6640;background:linear-gradient(180deg,#F7E7D2,#FBF2E6 40%,#F3E0C8);text-align:left;padding:6px 8px;display:flex;flex-direction:column;gap:2px;box-shadow:inset 0 6px 8px -6px rgba(90,60,30,.35)}
+.lvl:last-child{border-bottom:none}
+.lvl .ln{font-family:var(--display);font-size:.95rem;color:var(--muted)}
+.lvl .lt{font-family:var(--display);font-size:1rem;color:var(--ok)}
+.lvl .itemrow{display:flex;gap:2px;flex-wrap:wrap;align-items:flex-end}
+.lvl .itemrow svg{width:46px;height:46px}
+.lvl .itemrow button{border:none;background:none;padding:0;position:relative}
+.lvl .itemrow button.fixed::after{content:"✓";position:absolute;right:-2px;top:-4px;width:20px;height:20px;border-radius:50%;background:var(--ok);color:#fff;font-size:.8rem;display:flex;align-items:center;justify-content:center}
+.lvl.wrong{animation:shake .4s;background:var(--bad-bg)}
+.ruler{width:74px;flex:none;display:flex;flex-direction:column;font-size:.78rem;line-height:1.25;text-align:center;color:var(--muted);font-family:var(--display)}
+.ruler div{flex:1;display:flex;align-items:center;justify-content:center;border-left:3px dotted #C9B49A}
+.ruler .reach{border-left:3px solid var(--coral);color:var(--bad)}
+.item{display:flex;gap:14px;align-items:center;background:#fff;border:3px solid var(--line);border-radius:20px;padding:14px}
+.item svg{width:104px;height:104px;flex:none}
+.item .iname{font-family:var(--display);font-size:1.45rem;line-height:1.2}
+.item .isit{font-size:1.06rem;line-height:1.55}
+/* 보스 */
+.meter{height:22px;border:3px solid var(--line);border-radius:999px;background:#fff;overflow:hidden}
+.meter span{display:block;height:100%;background:linear-gradient(90deg,#9FDBC4,#2F7D5E);transition:width .5s}
+.bossgrid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:14px;align-items:start}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{text-align:left;padding:12px 14px;border:3px solid var(--line);border-radius:14px;background:#fff;font-size:1.05rem;line-height:1.45}
+.opt.wrong{background:var(--bad-bg);border-color:var(--bad);opacity:.7}
+.pick3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pick3 button{display:flex;flex-direction:column;gap:6px;padding:8px;border:3px solid var(--line);border-radius:16px;background:#fff;text-align:center;font-family:var(--display);font-size:1rem;line-height:1.25}
+.pick3 button svg{width:100%;height:auto;border-radius:10px;border:2px solid var(--line)}
+.pick3 button.wrong{background:var(--bad-bg);border-color:var(--bad);opacity:.7}
+/* 리포트 */
+.report{text-align:center;align-items:center;background:#FFFDF6;border-width:5px;border-style:double;padding:28px 22px}
+.report .big{font-family:var(--display);font-size:3.2rem;color:var(--wood-deep);line-height:1}
+.report table{border-collapse:collapse;font-size:1.05rem}
+.report td{padding:4px 12px;border-bottom:1px dashed #CBB}
+.report td:first-child{text-align:left} .report td:last-child{text-align:right;font-family:var(--display);color:#C98A00}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 18px;border-radius:14px;font-size:1.02rem;max-width:min(92vw,560px);text-align:center;z-index:50;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.on{opacity:1}
+.modalbg{position:fixed;inset:0;background:rgba(40,30,20,.45);display:flex;align-items:center;justify-content:center;padding:16px;z-index:40;overflow:auto}
+.modal{max-width:500px;width:100%;margin:auto}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@keyframes pop{0%{transform:scale(.8)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:700px){
+  .missions,.defs,.m3grid,.bossgrid,.m2grid{grid-template-columns:1fr}
+  .tray{flex-direction:row;flex-wrap:wrap} .titem{flex:1 1 45%}
+  .fields{grid-template-columns:1fr 1fr} .fields label:last-child{grid-column:1/-1}
+  .bogeum{width:88px} .pick3{grid-template-columns:1fr}
+}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+ <linearGradient id="gWood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EDC696"/><stop offset="1" stop-color="#CB935D"/></linearGradient>
+ <linearGradient id="gWoodD" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B9825A"/><stop offset="1" stop-color="#875736"/></linearGradient>
+ <linearGradient id="gMint" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#CDF1E2"/><stop offset="1" stop-color="#84CBAF"/></linearGradient>
+ <linearGradient id="gPink" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE8EE"/><stop offset="1" stop-color="#F3AFC0"/></linearGradient>
+ <linearGradient id="gSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EEF7FE"/><stop offset="1" stop-color="#A5D0EE"/></linearGradient>
+ <linearGradient id="gCream" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#EFE4D6"/></linearGradient>
+ <linearGradient id="gGray" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A9B1B5"/><stop offset="1" stop-color="#5E676C"/></linearGradient>
+ <linearGradient id="gYellow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF1AE"/><stop offset="1" stop-color="#FFC646"/></linearGradient>
+ <linearGradient id="gCoral" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB3A9"/><stop offset="1" stop-color="#E9776C"/></linearGradient>
+ <linearGradient id="gLav" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F1E9FB"/><stop offset="1" stop-color="#C9B3EA"/></linearGradient>
+ <linearGradient id="gWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF9F0"/><stop offset="1" stop-color="#F7E5CF"/></linearGradient>
+ <linearGradient id="gFloor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E7C496"/><stop offset="1" stop-color="#D2A570"/></linearGradient>
+ <linearGradient id="gGlass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F3FBFF"/><stop offset="1" stop-color="#9FD0EE"/></linearGradient>
+ <radialGradient id="gLamp" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFE68A" stop-opacity=".85"/><stop offset="1" stop-color="#FFE68A" stop-opacity="0"/></radialGradient>
+ <filter id="fSh" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="3" stdDeviation="2.4" flood-color="#5A3E2B" flood-opacity=".3"/></filter>
+ <pattern id="pGrain" width="46" height="14" patternUnits="userSpaceOnUse"><path d="M0 7 q11 -4 23 0 t23 0" fill="none" stroke="#5A3A20" stroke-opacity=".12" stroke-width="2"/></pattern>
+ <pattern id="pKnit" width="14" height="14" patternUnits="userSpaceOnUse"><path d="M0 7 l7 -5 l7 5" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="1.6"/></pattern>
+</defs></svg>
+<div class="wrap" id="app"></div>
+<div class="toast" id="toast"></div>
+<script>
+/* ===== 선생님이 바꿀 수 있는 값 ===== */
+const RESET_CODE = "9876";   // 선생님 전용 기기 초기화 코드 (반이 바뀔 때)
+/* ================================== */
+const KEY = "bogeum-room-v3";
+const BOGEUM = "data:image/webp;base64,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";
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+let S = load();
+function fresh(){ return {who:null, start:null, m:{1:null,2:null,3:null,4:null}, challenge:false, boss:null, end:null}; }
+function load(){ try{ const v = JSON.parse(localStorage.getItem(KEY)); if(v && v.m) return v; }catch(e){} return fresh(); }
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+function toast(msg, ms=2600){ const t=$('#toast'); t.textContent=msg; t.classList.add('on'); clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.remove('on'), ms); }
+function starStr(n){ return '★'.repeat(n) + '☆'.repeat(3-n); }
+function eul(w){ const c=w.charCodeAt(w.length-1)-0xAC00; return (c>=0&&c<11172&&c%28)?'을':'를'; }
+function eun(w){ const c=w.charCodeAt(w.length-1)-0xAC00; return (c>=0&&c<11172&&c%28)?'은':'는'; }
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function say(html, small){ return `<div class="say"><img class="bogeum" src="${BOGEUM}" alt="보금이"${small?' style="width:84px"':''}><div class="bubble">${html}</div></div>`; }
+function topbar(title){
+  return `<div class="top"><button class="btn sec small" onclick="go('home')">← 미션 목록</button><span class="disp" style="font-size:1.25rem">${title}</span><span class="who">${esc(S.who.cls)}반 ${esc(S.who.no)}번 ${esc(S.who.name)}</span></div>`;
+}
+let view = 'home';
+function go(v){ view = v; closeModal(); const t=$('#toast'); if(t) t.classList.remove('on'); render(); window.scrollTo(0,0); }
+
+/* ================= 그림 ================= */
+const O = 'stroke="#4A3B32" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"';
+const O2 = 'stroke="#4A3B32" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"';
+const HL = 'fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="3" stroke-linecap="round"';
+function scene(inner){
+  const fy = 108;
+  let planks=''; for(let x=0;x<230;x+=34) planks+=`<line x1="${x}" y1="${fy}" x2="${x-14}" y2="150" stroke="#9A6A3E" stroke-opacity=".18" stroke-width="2"/>`;
+  return `<svg viewBox="0 0 200 150" role="img"><rect width="200" height="${fy}" fill="url(#gWall)"/>
+   <rect y="${fy}" width="200" height="${150-fy}" fill="url(#gFloor)"/>${planks}
+   <rect y="${fy-5}" width="200" height="6" fill="#E8D2B6"/><line x1="0" y1="${fy+1}" x2="200" y2="${fy+1}" stroke="#4A3B32" stroke-opacity=".35" stroke-width="2"/>
+   ${inner}</svg>`;
+}
+const win = (x,y,w,h)=>`<g filter="url(#fSh)"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="4" fill="url(#gGlass)" ${O}/><line x1="${x+w/2}" y1="${y}" x2="${x+w/2}" y2="${y+h}" ${O2}/><line x1="${x}" y1="${y+h/2}" x2="${x+w}" y2="${y+h/2}" ${O2}/><path d="M${x+6} ${y+h-8} l${(w*0.25).toFixed(1)} -${(h*0.5).toFixed(1)}" ${HL}/></g>`;
+const plant = (x,y,s=1)=>`<g transform="translate(${x} ${y}) scale(${s})" filter="url(#fSh)"><path d="M0 0 q-14 -10 -10 -26 q12 4 10 26z" fill="#8FD0A5" ${O2}/><path d="M0 0 q14 -12 12 -28 q-14 6 -12 28z" fill="#6DBA8A" ${O2}/><path d="M-9 0 h18 l-3 14 h-12z" fill="url(#gCoral)" ${O2}/></g>`;
+const SC = {
+ livingstudy: scene(`${win(14,16,44,40)}<ellipse cx="40" cy="132" rx="38" ry="9" fill="#F6C9D2" opacity=".8"/>
+   <g filter="url(#fSh)"><rect x="10" y="84" width="60" height="30" rx="10" fill="url(#gMint)" ${O}/><rect x="14" y="70" width="52" height="20" rx="8" fill="#BDE8D6" ${O}/><rect x="18" y="74" width="16" height="12" rx="4" fill="url(#gPink)" ${O2}/><line x1="16" y1="114" x2="16" y2="121" ${O}/><line x1="64" y1="114" x2="64" y2="121" ${O}/></g>
+   <g filter="url(#fSh)"><rect x="84" y="34" width="34" height="88" rx="3" fill="url(#gWood)" ${O}/><rect x="84" y="34" width="34" height="88" fill="url(#pGrain)"/><line x1="84" y1="62" x2="118" y2="62" ${O2}/><line x1="84" y1="92" x2="118" y2="92" ${O2}/>
+    <rect x="89" y="42" width="6" height="19" fill="#F28B82" ${O2}/><rect x="96" y="45" width="6" height="16" fill="#7EC3EA" ${O2}/><rect x="103" y="40" width="6" height="21" fill="#FFD95E" ${O2}/><rect x="89" y="72" width="7" height="19" fill="#9FDBC4" ${O2}/><rect x="97" y="74" width="7" height="17" fill="#C9B3EA" ${O2}/></g>
+   <ellipse cx="160" cy="70" rx="26" ry="18" fill="url(#gLamp)"/>
+   <g filter="url(#fSh)"><rect x="128" y="88" width="64" height="8" rx="2" fill="url(#gWood)" ${O}/><line x1="133" y1="96" x2="133" y2="122" ${O}/><line x1="187" y1="96" x2="187" y2="122" ${O}/>
+    <rect x="140" y="72" width="26" height="16" rx="2" fill="#5E676C" ${O2}/><rect x="143" y="75" width="20" height="10" fill="url(#gSky)"/><path d="M178 88 v-16 l-6 -8 h14" fill="none" ${O2}/><path d="M168 60 h14 l-4 8 h-6z" fill="url(#gYellow)" ${O2}/></g>
+   <g filter="url(#fSh)"><rect x="150" y="104" width="22" height="6" rx="2" fill="url(#gCoral)" ${O2}/><line x1="153" y1="110" x2="153" y2="124" ${O2}/><line x1="169" y1="110" x2="169" y2="124" ${O2}/><rect x="150" y="90" width="5" height="16" rx="2" fill="url(#gCoral)" ${O2}/></g>`),
+ dining: scene(`<g filter="url(#fSh)"><rect x="6" y="18" width="56" height="24" rx="3" fill="url(#gCream)" ${O}/><line x1="34" y1="18" x2="34" y2="42" ${O2}/><circle cx="30" cy="30" r="1.8" fill="#4A3B32"/><circle cx="38" cy="30" r="1.8" fill="#4A3B32"/>
+    <rect x="6" y="72" width="56" height="44" rx="2" fill="url(#gCream)" ${O}/><rect x="4" y="66" width="60" height="8" rx="2" fill="url(#gWood)" ${O}/><line x1="34" y1="74" x2="34" y2="116" ${O2}/><path d="M18 66 v-10 q0 -6 6 -6 h4" fill="none" ${O2}/></g>
+   <path d="M100 0 v22" ${O2}/><path d="M90 22 h20 l6 12 h-32z" fill="url(#gYellow)" ${O2}/><ellipse cx="100" cy="64" rx="34" ry="24" fill="url(#gLamp)"/>
+   <g filter="url(#fSh)"><rect x="70" y="86" width="60" height="8" rx="3" fill="url(#gWood)" ${O}/><line x1="78" y1="94" x2="78" y2="124" ${O}/><line x1="122" y1="94" x2="122" y2="124" ${O}/><ellipse cx="88" cy="84" rx="9" ry="3.5" fill="#fff" ${O2}/><ellipse cx="112" cy="84" rx="9" ry="3.5" fill="#fff" ${O2}/><path d="M97 84 q3 -10 6 0" fill="url(#gCoral)" ${O2}/></g>
+   <g filter="url(#fSh)"><rect x="140" y="92" width="56" height="28" rx="9" fill="url(#gPink)" ${O}/><rect x="144" y="78" width="48" height="20" rx="8" fill="#F8C9D4" ${O}/><rect x="150" y="82" width="14" height="12" rx="4" fill="url(#gYellow)" ${O2}/></g>
+   <text x="34" y="140" text-anchor="middle" font-family="Jua,sans-serif" font-size="11" fill="#6A4A30">부엌</text><text x="100" y="140" text-anchor="middle" font-family="Jua,sans-serif" font-size="11" fill="#6A4A30">식사</text><text x="168" y="140" text-anchor="middle" font-family="Jua,sans-serif" font-size="11" fill="#6A4A30">거실</text>`),
+ curtain: scene(`${win(80,16,40,36)}<line x1="8" y1="10" x2="192" y2="10" stroke="#9A6640" stroke-width="4" stroke-linecap="round"/>
+   <g filter="url(#fSh)"><path d="M88 10 q-6 24 2 48 q-8 24 0 50 h24 q8 -26 0 -50 q8 -24 2 -48z" fill="url(#gPink)" ${O}/><path d="M96 14 q-4 40 0 92 M106 14 q4 40 0 92" fill="none" stroke="#E794A8" stroke-width="2"/></g>
+   <g filter="url(#fSh)"><rect x="8" y="86" width="66" height="26" rx="6" fill="url(#gSky)" ${O}/><rect x="8" y="76" width="22" height="14" rx="5" fill="url(#gCream)" ${O2}/><rect x="6" y="64" width="6" height="52" rx="2" fill="url(#gWood)" ${O2}/><path d="M32 86 h42" ${O2}/></g>
+   <ellipse cx="160" cy="128" rx="34" ry="9" fill="#FFE59C" opacity=".8"/>
+   <g filter="url(#fSh)"><circle cx="150" cy="110" r="11" fill="url(#gYellow)" ${O}/><path d="M139 110 h22 M150 99 v22" ${O2}/><rect x="166" y="96" width="20" height="24" rx="3" fill="url(#gCoral)" ${O}/><rect x="170" y="90" width="12" height="8" rx="2" fill="url(#gMint)" ${O2}/><path d="M128 124 l8 -14 l8 14z" fill="url(#gLav)" ${O2}/></g>
+   <text x="40" y="140" text-anchor="middle" font-family="Jua,sans-serif" font-size="11" fill="#6A4A30">잠자기</text><text x="160" y="146" text-anchor="middle" font-family="Jua,sans-serif" font-size="11" fill="#6A4A30">놀이</text>`),
+ movewall: scene(`<line x1="20" y1="8" x2="180" y2="8" stroke="#9A6640" stroke-width="4"/><line x1="20" y1="110" x2="180" y2="110" stroke="#9A6640" stroke-width="3" stroke-dasharray="6 5"/>
+   <g filter="url(#fSh)"><rect x="90" y="10" width="20" height="100" rx="3" fill="url(#gLav)" ${O}/><rect x="94" y="16" width="12" height="88" rx="2" fill="#fff" opacity=".35"/><circle cx="104" cy="60" r="2.5" fill="#4A3B32"/></g>
+   <path d="M76 60 h-22 m7 -7 l-7 7 l7 7" fill="none" ${O}/><path d="M124 60 h22 m-7 -7 l7 7 l-7 7" fill="none" ${O}/>
+   <g filter="url(#fSh)"><rect x="10" y="88" width="50" height="7" rx="2" fill="url(#gWood)" ${O}/><line x1="15" y1="95" x2="15" y2="120" ${O}/><line x1="55" y1="95" x2="55" y2="120" ${O}/><rect x="20" y="74" width="20" height="14" rx="2" fill="#5E676C" ${O2}/><rect x="22" y="76" width="16" height="10" fill="url(#gSky)"/></g>
+   <g filter="url(#fSh)"><rect x="132" y="94" width="60" height="26" rx="9" fill="url(#gMint)" ${O}/><rect x="136" y="80" width="52" height="20" rx="8" fill="#BDE8D6" ${O}/></g>
+   <text x="35" y="140" text-anchor="middle" font-family="Jua,sans-serif" font-size="11" fill="#6A4A30">공부</text><text x="162" y="140" text-anchor="middle" font-family="Jua,sans-serif" font-size="11" fill="#6A4A30">휴식</text>`),
+ loft: scene(`${win(150,14,40,34)}<g filter="url(#fSh)"><rect x="20" y="40" width="120" height="16" rx="4" fill="url(#gSky)" ${O}/><rect x="24" y="30" width="30" height="12" rx="5" fill="url(#gCream)" ${O2}/><path d="M56 40 h84" ${O2}/>
+    <rect x="18" y="56" width="124" height="7" fill="url(#gWoodD)" ${O}/><line x1="22" y1="63" x2="22" y2="124" ${O}/><line x1="138" y1="63" x2="138" y2="124" ${O}/>
+    <line x1="148" y1="56" x2="148" y2="124" ${O}/><line x1="168" y1="56" x2="168" y2="124" ${O}/><line x1="148" y1="72" x2="168" y2="72" ${O2}/><line x1="148" y1="90" x2="168" y2="90" ${O2}/><line x1="148" y1="108" x2="168" y2="108" ${O2}/></g>
+   <ellipse cx="80" cy="82" rx="30" ry="14" fill="url(#gLamp)"/>
+   <g filter="url(#fSh)"><rect x="34" y="92" width="92" height="7" rx="2" fill="url(#gWood)" ${O}/><rect x="48" y="76" width="26" height="16" rx="2" fill="#5E676C" ${O2}/><rect x="51" y="79" width="20" height="10" fill="url(#gSky)"/><path d="M110 92 v-14 l-6 -6 h12" fill="none" ${O2}/><path d="M100 66 h14 l-3 7 h-8z" fill="url(#gYellow)" ${O2}/>
+    <rect x="74" y="108" width="22" height="6" rx="2" fill="url(#gCoral)" ${O2}/><line x1="85" y1="114" x2="85" y2="126" ${O2}/><rect x="92" y="94" width="5" height="16" rx="2" fill="url(#gCoral)" ${O2}/></g>`),
+ wallshelf: scene(`${win(140,18,44,40)}<g filter="url(#fSh)"><rect x="18" y="38" width="80" height="7" rx="2" fill="url(#gWoodD)" ${O}/><rect x="50" y="72" width="80" height="7" rx="2" fill="url(#gWoodD)" ${O}/></g>
+   <g filter="url(#fSh)"><rect x="24" y="20" width="7" height="18" fill="#F28B82" ${O2}/><rect x="32" y="23" width="7" height="15" fill="#7EC3EA" ${O2}/><rect x="40" y="18" width="7" height="20" fill="#FFD95E" ${O2}/></g>${plant(80,36,.72)}
+   <g filter="url(#fSh)"><rect x="58" y="48" width="22" height="24" rx="2" fill="#fff" ${O2}/><path d="M61 68 l7 -9 l5 5 l4 -4 l3 8z" fill="#9FDBC4"/><rect x="92" y="56" width="16" height="16" rx="4" fill="url(#gYellow)" ${O2}/><rect x="112" y="60" width="12" height="12" rx="6" fill="url(#gLav)" ${O2}/></g>
+   <g filter="url(#fSh)"><rect x="24" y="86" width="40" height="26" rx="8" fill="url(#gPink)" ${O}/><rect x="28" y="76" width="32" height="14" rx="6" fill="#F8C9D4" ${O2}/><line x1="28" y1="112" x2="28" y2="120" ${O2}/><line x1="60" y1="112" x2="60" y2="120" ${O2}/></g>`),
+ stairs: scene(`<g filter="url(#fSh)"><path d="M14 112 V96 H42 V80 H70 V64 H98 V48 H126 V32 H154 V16 H190 V112z" fill="url(#gWood)" ${O}/>
+    <rect x="44" y="86" width="24" height="22" rx="2" fill="url(#gCream)" ${O2}/><rect x="72" y="70" width="24" height="38" rx="2" fill="url(#gCream)" ${O2}/><rect x="100" y="54" width="24" height="54" rx="2" fill="url(#gCream)" ${O2}/><rect x="128" y="38" width="24" height="70" rx="2" fill="url(#gCream)" ${O2}/><rect x="156" y="22" width="30" height="86" rx="2" fill="url(#gCream)" ${O2}/>
+    <circle cx="56" cy="98" r="2.5" fill="#4A3B32"/><circle cx="84" cy="90" r="2.5" fill="#4A3B32"/><circle cx="112" cy="82" r="2.5" fill="#4A3B32"/><circle cx="140" cy="74" r="2.5" fill="#4A3B32"/><circle cx="171" cy="66" r="2.5" fill="#4A3B32"/></g>
+   <path d="M14 80 L190 2" stroke="#875736" stroke-width="4" stroke-linecap="round"/><path d="M28 94 v-20 M56 78 v-22 M84 62 v-24 M112 46 v-24 M140 30 v-24 M168 16 v-12" stroke="#875736" stroke-width="3" stroke-linecap="round"/><g filter="url(#fSh)"><rect x="104" y="112" width="18" height="12" rx="2" fill="url(#gPink)" ${O2}/><rect x="74" y="114" width="22" height="10" rx="2" fill="url(#gMint)" ${O2}/></g>`),
+ underbed: scene(`${win(18,16,40,34)}<g filter="url(#fSh)"><rect x="70" y="40" width="10" height="56" rx="3" fill="url(#gWoodD)" ${O}/><rect x="70" y="66" width="122" height="22" rx="6" fill="url(#gSky)" ${O}/><rect x="80" y="56" width="30" height="14" rx="6" fill="url(#gCream)" ${O2}/><path d="M112 66 h80" ${O2}/>
+    <rect x="70" y="88" width="122" height="26" fill="url(#gWood)" ${O}/></g>
+   <g filter="url(#fSh)"><rect x="66" y="98" width="56" height="24" rx="2" fill="url(#gCream)" ${O}/><rect x="72" y="92" width="44" height="10" rx="2" fill="url(#gPink)" ${O2}/><rect x="80" y="88" width="20" height="8" rx="2" fill="url(#gMint)" ${O2}/><line x1="86" y1="110" x2="102" y2="110" ${O}/>
+    <rect x="132" y="94" width="52" height="16" rx="2" fill="url(#gCream)" ${O2}/><line x1="150" y1="102" x2="166" y2="102" ${O2}/></g>`),
+ sofabed: scene(`<circle cx="30" cy="26" r="11" fill="url(#gYellow)" ${O}/><path d="M168 16 a12 12 0 1 0 10 18 a10 10 0 1 1 -10 -18z" fill="url(#gLav)" ${O}/>
+   <g filter="url(#fSh)"><rect x="12" y="76" width="70" height="32" rx="9" fill="url(#gPink)" ${O}/><rect x="16" y="62" width="62" height="20" rx="8" fill="#F8C9D4" ${O}/><line x1="18" y1="108" x2="18" y2="118" ${O}/><line x1="76" y1="108" x2="76" y2="118" ${O}/></g>
+   <path d="M90 92 h14 m-6 -6 l6 6 l-6 6" fill="none" ${O}/>
+   <g filter="url(#fSh)"><rect x="112" y="88" width="80" height="20" rx="6" fill="url(#gPink)" ${O}/><rect x="116" y="80" width="22" height="12" rx="5" fill="url(#gCream)" ${O2}/><path d="M140 88 h52" ${O2}/><line x1="116" y1="108" x2="116" y2="118" ${O}/><line x1="188" y1="108" x2="188" y2="118" ${O}/></g>
+   <text x="47" y="140" text-anchor="middle" font-family="Jua,sans-serif" font-size="11" fill="#6A4A30">낮</text><text x="152" y="140" text-anchor="middle" font-family="Jua,sans-serif" font-size="11" fill="#6A4A30">밤</text>`),
+ builtin: scene(`<g filter="url(#fSh)"><rect x="40" y="6" width="120" height="110" rx="3" fill="url(#gWood)" ${O}/><rect x="40" y="6" width="120" height="110" fill="url(#pGrain)"/>
+    <line x1="80" y1="6" x2="80" y2="116" ${O2}/><line x1="120" y1="6" x2="120" y2="116" ${O2}/><line x1="40" y1="30" x2="160" y2="30" ${O2}/>
+    <circle cx="74" cy="72" r="2.5" fill="#FFD95E" stroke="#4A3B32"/><circle cx="86" cy="72" r="2.5" fill="#FFD95E" stroke="#4A3B32"/><circle cx="126" cy="72" r="2.5" fill="#FFD95E" stroke="#4A3B32"/>
+    <rect x="46" y="12" width="28" height="14" rx="2" fill="url(#gSky)" ${O2}/><rect x="86" y="12" width="28" height="14" rx="2" fill="url(#gPink)" ${O2}/><rect x="126" y="12" width="28" height="14" rx="2" fill="url(#gMint)" ${O2}/></g>
+   <path d="M180 6 v104 m-5 -99 l5 -5 l5 5 m-10 94 l5 5 l5 -5" fill="none" stroke="#C8463F" stroke-width="2.5"/><text x="186" y="64" font-family="Jua,sans-serif" font-size="10" fill="#C8463F" writing-mode="tb">천장까지</text>`),
+ doortop: scene(`<g filter="url(#fSh)"><rect x="70" y="40" width="58" height="72" rx="2" fill="url(#gWood)" ${O}/><rect x="78" y="48" width="42" height="24" rx="2" fill="none" ${O2}/><rect x="78" y="78" width="42" height="26" rx="2" fill="none" ${O2}/><circle cx="118" cy="76" r="3" fill="url(#gYellow)" ${O2}/></g>
+   <g filter="url(#fSh)"><rect x="58" y="28" width="82" height="7" rx="2" fill="url(#gWoodD)" ${O}/><rect x="64" y="12" width="20" height="16" rx="2" fill="url(#gMint)" ${O2}/><rect x="88" y="14" width="18" height="14" rx="2" fill="url(#gPink)" ${O2}/><rect x="110" y="10" width="22" height="18" rx="2" fill="url(#gYellow)" ${O2}/></g>`),
+ floorbox: scene(`<g filter="url(#fSh)"><rect x="20" y="40" width="70" height="72" rx="3" fill="url(#gWoodD)" ${O}/><line x1="55" y1="40" x2="55" y2="112" ${O2}/></g>
+   <g filter="url(#fSh)"><rect x="96" y="86" width="44" height="34" rx="2" fill="#E2B886" ${O}/><path d="M96 98 h44 M118 86 v12" ${O2}/><rect x="100" y="56" width="38" height="30" rx="2" fill="#D9A877" ${O}/><path d="M100 66 h38 M119 56 v10" ${O2}/><rect x="104" y="30" width="32" height="26" rx="2" fill="#E2B886" ${O}/><path d="M104 40 h32 M120 30 v10" ${O2}/></g>
+   <path d="M146 132 h40" stroke="#C8463F" stroke-width="3" stroke-dasharray="4 4"/>`),
+ bigcab: scene(`<g filter="url(#fSh)"><rect x="40" y="30" width="120" height="86" rx="4" fill="url(#gWoodD)" ${O}/><rect x="40" y="30" width="120" height="86" fill="url(#pGrain)"/><line x1="80" y1="30" x2="80" y2="116" ${O2}/><line x1="120" y1="30" x2="120" y2="116" ${O2}/><circle cx="74" cy="74" r="2.5" fill="#FFD95E"/><circle cx="86" cy="74" r="2.5" fill="#FFD95E"/><circle cx="114" cy="74" r="2.5" fill="#FFD95E"/><circle cx="126" cy="74" r="2.5" fill="#FFD95E"/></g>
+   <path d="M14 132 h22 M164 132 h22" stroke="#C8463F" stroke-width="3" stroke-dasharray="4 4"/>`)
+};
+
+/* 물건 (100x100) */
+const IT = {
+ quilt:`<svg viewBox="0 0 100 100"><g filter="url(#fSh)"><path d="M10 40 q40 -14 80 0 v34 q-40 12 -80 0z" fill="url(#gSky)" ${O}/><path d="M10 40 q40 -14 80 0 v34 q-40 12 -80 0z" fill="url(#pKnit)"/><path d="M10 56 q40 -12 80 0" fill="none" ${O2}/><path d="M30 34 v40 M50 30 v46 M70 34 v40" stroke="#fff" stroke-opacity=".6" stroke-width="2"/></g><path d="M66 14 l3 6 l6 1 l-5 4 l1 6 l-5 -3 l-5 3 l1 -6 l-5 -4 l6 -1z" fill="#BFE3F7" ${O2}/></svg>`,
+ suitcase:`<svg viewBox="0 0 100 100"><g filter="url(#fSh)"><rect x="38" y="12" width="24" height="16" rx="6" fill="none" ${O}/><rect x="18" y="26" width="64" height="58" rx="12" fill="url(#gPink)" ${O}/><rect x="34" y="26" width="6" height="58" fill="#E794A8"/><rect x="60" y="26" width="6" height="58" fill="#E794A8"/><rect x="18" y="26" width="64" height="58" rx="12" fill="none" ${O}/><circle cx="30" cy="90" r="5" fill="#5E676C" ${O2}/><circle cx="70" cy="90" r="5" fill="#5E676C" ${O2}/><path d="M24 38 q2 -5 8 -5" ${HL}/></g></svg>`,
+ tissue:`<svg viewBox="0 0 100 100"><g filter="url(#fSh)"><path d="M14 46 h72 l-4 38 h-64z" fill="url(#gMint)" ${O}/><path d="M22 66 q7 -6 14 0 t14 0 t14 0 t14 0" fill="none" stroke="#fff" stroke-width="3"/><ellipse cx="50" cy="46" rx="18" ry="5" fill="#fff" ${O2}/><path d="M40 46 q-6 -24 10 -30 q14 6 6 30" fill="#fff" ${O}/><path d="M48 22 q-4 8 0 18" fill="none" stroke="#C9D3D8" stroke-width="2"/></g></svg>`,
+ lotion:`<svg viewBox="0 0 100 100"><g filter="url(#fSh)"><rect x="32" y="40" width="36" height="48" rx="12" fill="url(#gPink)" ${O}/><rect x="42" y="26" width="16" height="14" rx="2" fill="url(#gCream)" ${O}/><path d="M50 26 v-8 h16 v4" fill="none" ${O}/><rect x="40" y="56" width="20" height="16" rx="4" fill="#fff" ${O2}/><path d="M44 62 h12 M44 67 h8" ${O2}/><path d="M38 48 q0 -4 4 -5" ${HL}/></g></svg>`,
+ books:`<svg viewBox="0 0 100 100"><g filter="url(#fSh)"><rect x="10" y="70" width="80" height="14" rx="3" fill="url(#gMint)" ${O}/><rect x="14" y="56" width="72" height="14" rx="3" fill="url(#gSky)" ${O}/><rect x="18" y="42" width="64" height="14" rx="3" fill="url(#gCoral)" ${O}/><path d="M80 74 h6 M82 60 h4 M78 46 h4" stroke="#fff" stroke-width="2"/>
+   <rect x="24" y="22" width="52" height="16" rx="8" fill="url(#gYellow)" ${O}/><path d="M32 30 h28" ${O2}/><path d="M64 26 l6 4 l-6 4z" fill="#4A3B32"/></g></svg>`,
+ cup:`<svg viewBox="0 0 100 100"><g filter="url(#fSh)"><path d="M12 36 h42 l-5 50 h-32z" fill="url(#gCream)" ${O}/><path d="M15 54 h36" stroke="#7EC3EA" stroke-width="6"/><path d="M54 46 q12 2 8 14 q-3 8 -10 6" fill="none" ${O}/>
+  <rect x="66" y="26" width="22" height="60" rx="9" fill="url(#gSky)" ${O}/><rect x="69" y="16" width="16" height="12" rx="3" fill="#2F7D5E" ${O2}/><path d="M66 50 h22" stroke="#fff" stroke-opacity=".7" stroke-width="3"/><path d="M71 36 v10" ${HL}/></g></svg>`,
+ dumbbell:`<svg viewBox="0 0 100 100"><g filter="url(#fSh)"><rect x="30" y="46" width="40" height="10" rx="2" fill="url(#gGray)" ${O}/><rect x="14" y="30" width="18" height="42" rx="6" fill="url(#gGray)" ${O}/><rect x="68" y="30" width="18" height="42" rx="6" fill="url(#gGray)" ${O}/><rect x="6" y="38" width="9" height="26" rx="3" fill="url(#gGray)" ${O}/><rect x="85" y="38" width="9" height="26" rx="3" fill="url(#gGray)" ${O}/><path d="M18 36 v14 M72 36 v14" ${HL}/></g><text x="50" y="92" text-anchor="middle" font-family="Jua,sans-serif" font-size="14" fill="#5E676C">5kg</text></svg>`,
+ toolbox:`<svg viewBox="0 0 100 100"><g filter="url(#fSh)"><path d="M34 38 v-12 h32 v12" fill="none" ${O}/><rect x="10" y="38" width="80" height="46" rx="7" fill="url(#gCoral)" ${O}/><line x1="10" y1="54" x2="90" y2="54" ${O2}/><rect x="43" y="49" width="14" height="11" rx="2" fill="url(#gYellow)" ${O2}/><path d="M16 44 h20" ${HL}/></g></svg>`
+};
+
+/* 방 가구 (위에서 본 모습) */
+function furnSVG(type, w, h){
+  const W=w*100, H=h*100, vert = H>W;
+  let g='';
+  if(type==='bed'){
+    g += `<rect x="5" y="5" width="${W-10}" height="${H-10}" rx="16" fill="url(#gWood)" ${O}/><rect x="5" y="5" width="${W-10}" height="${H-10}" rx="16" fill="url(#pGrain)"/>`;
+    g += `<rect x="16" y="16" width="${W-32}" height="${H-32}" rx="12" fill="url(#gCream)" ${O}/>`;
+    if(vert){
+      g += `<rect x="28" y="26" width="${W-56}" height="50" rx="16" fill="url(#gPink)" ${O}/><path d="M40 38 q${(W-80)/2} -6 ${W-80} 0" ${HL}/>`;
+      const y0=H*0.3;
+      g += `<path d="M16 ${y0} H${W-16} V${H-28} q0 12 -12 12 H28 q-12 0 -12 -12z" fill="url(#gMint)" ${O}/><path d="M16 ${y0} H${W-16} V${H-28} q0 12 -12 12 H28 q-12 0 -12 -12z" fill="url(#pKnit)"/>`;
+      g += `<path d="M16 ${y0} H${W-16} V${y0+24} H16z" fill="#E6F7EF" ${O2}/>`;
+    } else {
+      g += `<rect x="26" y="28" width="50" height="${H-56}" rx="16" fill="url(#gPink)" ${O}/><path d="M38 40 q-6 ${(H-80)/2} 0 ${H-80}" ${HL}/>`;
+      const x0=W*0.3;
+      g += `<path d="M${x0} 16 V${H-16} H${W-28} q12 0 12 -12 V28 q0 -12 -12 -12z" fill="url(#gMint)" ${O}/><path d="M${x0} 16 V${H-16} H${W-28} q12 0 12 -12 V28 q0 -12 -12 -12z" fill="url(#pKnit)"/>`;
+      g += `<path d="M${x0} 16 V${H-16} H${x0+24} V16z" fill="#E6F7EF" ${O2}/>`;
+    }
+  } else if(type==='ward'){
+    g += `<rect x="5" y="5" width="${W-10}" height="${H-10}" rx="8" fill="url(#gWoodD)" ${O}/><rect x="14" y="14" width="${W-28}" height="${H-28}" rx="5" fill="url(#gWood)" ${O2}/><rect x="14" y="14" width="${W-28}" height="${H-28}" rx="5" fill="url(#pGrain)"/>`;
+    const n=Math.max(w,h);
+    for(let i=1;i<n;i++) g += vert?`<line x1="14" y1="${i*100}" x2="${W-14}" y2="${i*100}" ${O2}/>`:`<line x1="${i*100}" y1="14" x2="${i*100}" y2="${H-14}" ${O2}/>`;
+    for(let i=0;i<n;i++) g += vert?`<circle cx="${W/2}" cy="${i*100+50}" r="6" fill="url(#gYellow)" ${O2}/>`:`<circle cx="${i*100+50}" cy="${H/2}" r="6" fill="url(#gYellow)" ${O2}/>`;
+  } else if(type==='desk'){
+    g += `<rect x="6" y="6" width="${W-12}" height="${H-12}" rx="10" fill="url(#gWood)" ${O}/><rect x="6" y="6" width="${W-12}" height="${H-12}" rx="10" fill="url(#pGrain)"/>`;
+    const cx=W/2, cy=H/2;
+    if(vert) g += `<circle cx="${cx}" cy="${cy+52}" r="30" fill="url(#gLamp)"/><rect x="${cx-26}" y="${cy-66}" width="52" height="70" rx="6" fill="url(#gGray)" ${O}/><rect x="${cx-19}" y="${cy-59}" width="38" height="50" rx="3" fill="url(#gSky)"/><circle cx="${cx}" cy="${cy+52}" r="13" fill="url(#gYellow)" ${O}/><rect x="${cx+14}" y="${cy+14}" width="14" height="14" rx="4" fill="url(#gCoral)" ${O2}/>`;
+    else g += `<circle cx="${cx+52}" cy="${cy}" r="30" fill="url(#gLamp)"/><rect x="${cx-66}" y="${cy-26}" width="70" height="52" rx="6" fill="url(#gGray)" ${O}/><rect x="${cx-59}" y="${cy-19}" width="50" height="38" rx="3" fill="url(#gSky)"/><circle cx="${cx+52}" cy="${cy}" r="13" fill="url(#gYellow)" ${O}/><rect x="${cx+12}" y="${cy+12}" width="14" height="14" rx="4" fill="url(#gCoral)" ${O2}/>`;
+  } else if(type==='shelf'){
+    g += `<rect x="5" y="5" width="${W-10}" height="${H-10}" rx="6" fill="url(#gWoodD)" ${O}/>`;
+    const cols=['url(#gCoral)','url(#gSky)','url(#gYellow)','url(#gMint)','url(#gLav)','url(#gPink)'];
+    const n=Math.max(w,h)*5;
+    for(let i=0;i<n;i++){ const c=cols[(i*7)%cols.length]; const jit=(i%3)*4;
+      if(vert) g += `<rect x="${16+jit}" y="${(15+i*((H-30)/n)).toFixed(1)}" width="${W-32-jit}" height="${((H-30)/n-3).toFixed(1)}" rx="2" fill="${c}" ${O2}/>`;
+      else g += `<rect x="${(15+i*((W-30)/n)).toFixed(1)}" y="${16+jit}" width="${((W-30)/n-3).toFixed(1)}" height="${H-32-jit}" rx="2" fill="${c}" ${O2}/>`; }
+  } else if(type==='drawer'){
+    g += `<rect x="8" y="8" width="${W-16}" height="${H-16}" rx="12" fill="url(#gWood)" ${O}/><rect x="8" y="8" width="${W-16}" height="${H-16}" rx="12" fill="url(#pGrain)"/>`;
+    g += `<circle cx="50" cy="50" r="22" fill="url(#gMint)" ${O}/><path d="M50 50 q-16 -8 -12 -24 M50 50 q14 -10 16 -22 M50 50 q-2 -16 4 -26" fill="none" stroke="#2F7D5E" stroke-width="3" stroke-linecap="round"/><circle cx="50" cy="50" r="8" fill="url(#gCoral)" ${O2}/>`;
+  }
+  return `<svg viewBox="-4 -4 ${W+8} ${H+8}" preserveAspectRatio="none"><g filter="url(#fSh)">${g}</g></svg>`;
+}
+
+/* ================= 방 공통 (배치 퍼즐 · 최종 보스) ================= */
+const FDEF = {
+ bed:   {name:'침대', w:2,h:4, big:true,  tall:false, front:false, sub:'꼭 필요하고 부피가 큼'},
+ ward:  {name:'옷장', w:3,h:1, big:true,  tall:true,  front:true,  sub:'키 큼 · 문 열 자리 필요'},
+ desk:  {name:'책상', w:2,h:1, big:false, tall:false, front:true,  sub:'의자를 뺄 자리 필요'},
+ shelf: {name:'책장', w:2,h:1, big:false, tall:true,  front:false, sub:'키가 큰 가구'},
+ drawer:{name:'협탁', w:1,h:1, big:false, tall:false, front:false, sub:'침대 옆에 두는 작은 서랍장'}
+};
+function mkCfg(c){
+  const wc=(side,a,n)=>{const o=[];for(let i=0;i<n;i++){ if(side==='left')o.push([0,a+i]); if(side==='right')o.push([c.cols-1,a+i]); if(side==='top')o.push([a+i,0]); if(side==='bottom')o.push([a+i,c.rows-1]); } return o;};
+  c.WIN=wc(c.window.side,c.window.a,c.window.n);
+  c.SW=wc(c.sw.side,c.sw.a,1)[0]; c.OUT=wc(c.out.side,c.out.a,1)[0];
+  const a=c.door.a;
+  c.SWING = c.door.side==='bottom'?[[a,c.rows-1],[a+1,c.rows-1],[a,c.rows-2],[a+1,c.rows-2]]:[[a,0],[a+1,0],[a,1],[a+1,1]];
+  return c;
+}
+const ROOM1 = mkCfg({cols:6,rows:6, window:{side:'left',a:1,n:3}, door:{side:'bottom',a:4}, sw:{side:'bottom',a:3}, out:{side:'right',a:1}, furn:['desk','shelf','bed','ward']});
+const ROOM2 = mkCfg({cols:6,rows:5, window:{side:'bottom',a:2,n:3}, door:{side:'top',a:0}, sw:{side:'top',a:2}, out:{side:'right',a:0}, furn:['drawer','desk','shelf','bed','ward']});
+const key = c => c[0]+','+c[1];
+function cellsOf(p){ const out=[]; for(let y=0;y<p.h;y++) for(let x=0;x<p.w;x++) out.push([p.c+x,p.r+y]); return out; }
+function occMap(placed, except){ const m={}; for(const id in placed){ if(id===except) continue; for(const c of cellsOf(placed[id])) m[key(c)]=id; } return m; }
+function inRoom(cfg,c){ return c[0]>=0&&c[1]>=0&&c[0]<cfg.cols&&c[1]<cfg.rows; }
+function frontSides(p){ const a=[],b=[];
+  if(p.w>=p.h){ for(let x=0;x<p.w;x++){ a.push([p.c+x,p.r-1]); b.push([p.c+x,p.r+p.h]); } }
+  else { for(let y=0;y<p.h;y++){ a.push([p.c-1,p.r+y]); b.push([p.c+p.w,p.r+y]); } }
+  return [a,b]; }
+function wallStyle(cfg, side, a, n){
+  const P='var(--p)', X=`(100% - 2*${P})`;
+  if(side==='left'||side==='right') return `${side}:0;width:${P};top:calc(${P} + ${X}*${a}/${cfg.rows});height:calc(${X}*${n}/${cfg.rows});writing-mode:vertical-rl`;
+  return `${side}:0;height:${P};left:calc(${P} + ${X}*${a}/${cfg.cols});width:calc(${X}*${n}/${cfg.cols})`;
+}
+function lightStyle(cfg){ const w=cfg.window;
+  if(w.side==='left') return `left:-12%;top:${(w.a-0.6)/cfg.rows*100}%;width:55%;height:${(w.n+1.2)/cfg.rows*100}%;background:radial-gradient(ellipse at left center,rgba(255,246,200,.9),transparent 70%)`;
+  if(w.side==='bottom') return `bottom:-14%;left:${(w.a-0.6)/cfg.cols*100}%;height:60%;width:${(w.n+1.2)/cfg.cols*100}%;background:radial-gradient(ellipse at center bottom,rgba(255,246,200,.9),transparent 70%)`;
+  return '';
+}
+function swingSVG(cfg){
+  const W=cfg.cols*100, H=cfg.rows*100, a=cfg.door.a;
+  const arc = cfg.door.side==='bottom'
+    ? `<path d="M${a*100} ${H} A200 200 0 0 1 ${(a+2)*100} ${H-200}" fill="none" stroke="#C8463F" stroke-width="5" stroke-dasharray="12 9"/><line x1="${(a+2)*100}" y1="${H}" x2="${(a+2)*100}" y2="${H-200}" stroke="#8C5B36" stroke-width="12" stroke-linecap="round"/>`
+    : `<path d="M${(a+2)*100} 0 A200 200 0 0 1 ${a*100} 200" fill="none" stroke="#C8463F" stroke-width="5" stroke-dasharray="12 9"/><line x1="${a*100}" y1="0" x2="${a*100}" y2="200" stroke="#8C5B36" stroke-width="12" stroke-linecap="round"/>`;
+  return `<svg class="overlay" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">${arc}</svg>`;
+}
+function roomHTML(cfg, placed, o={}){
+  let cells='';
+  for(let r=0;r<cfg.rows;r++) for(let c=0;c<cfg.cols;c++){
+    const sw=!o.noSwing && cfg.SWING.some(s=>s[0]===c&&s[1]===r);
+    cells+= o.onCell ? `<button class="cell${sw?' swing':''}${o.hit&&o.hit.has(c+','+r)?' hit':''}" aria-label="${r+1}행 ${c+1}열" onclick="${o.onCell}(${c},${r})"></button>`
+                     : `<div class="cell${sw?' swing':''}"></div>`;
+  }
+  let pieces='';
+  for(const id in placed){ const p=placed[id];
+    pieces+=`<button class="piece${o.sel===id?' sel':''}${o.bad&&o.bad.has(id)?' bad':''}${o.fixed&&o.fixed.has(id)?' fixed':''}" style="left:${p.c/cfg.cols*100}%;top:${p.r/cfg.rows*100}%;width:${p.w/cfg.cols*100}%;height:${p.h/cfg.rows*100}%" onclick="${o.onPiece}('${id}')" aria-label="${FDEF[id].name}">${furnSVG(id,p.w,p.h)}</button>`;
+  }
+  return `<div class="roomwrap"><div class="floor" style="grid-template-columns:repeat(${cfg.cols},1fr);grid-template-rows:repeat(${cfg.rows},1fr);aspect-ratio:${cfg.cols}/${cfg.rows}">
+     <div class="light" style="${lightStyle(cfg)}"></div>${cells}${swingSVG(cfg)}${pieces}</div>
+    <div class="wallmark wm-win" style="${wallStyle(cfg,cfg.window.side,cfg.window.a,cfg.window.n)}">창문</div>
+    <div class="wallmark wm-door" style="${wallStyle(cfg,cfg.door.side,cfg.door.a,2)}">문</div>
+    <div class="wallmark wm-sw" style="${wallStyle(cfg,cfg.sw.side,cfg.sw.a,1)}">스위치</div>
+    <div class="wallmark wm-out" style="${wallStyle(cfg,cfg.out.side,cfg.out.a,1)}">콘센트</div></div>`;
+}
+
+/* ================= 미션 1 : 공간 마술 카드 ================= */
+const CARDS = [
+ {k:'livingstudy', t:'거실에 책상과 책장을 놓아 공부하는 공간으로도 쓴다.', a:'다', why:'거실 하나를 쉬는 곳 + 공부하는 곳으로 — 한 공간을 여러 목적으로 썼어요.'},
+ {k:'loft', t:'침대를 높이 올리고, 그 아래 공간에 책상을 둔다.', a:'입', why:'침대 아래(높이)의 빈 공간을 작업 공간으로 썼어요. 위아래를 쓰면 입체적 활용!'},
+ {k:'dining', t:'식사실을 거실·부엌과 함께 쓴다.', a:'다', why:'한 공간에서 요리·식사·휴식을 함께 — 다목적 활용이에요.'},
+ {k:'wallshelf', t:'빈 벽에 선반을 달아 물건을 올려 둔다.', a:'입', why:'바닥이 아닌 벽(높이)을 수납공간으로 — 입체적 활용이에요.'},
+ {k:'curtain', t:'커튼으로 방을 나누어 한쪽은 잠자는 곳, 한쪽은 노는 곳으로 쓴다.', a:'다', why:'생활 내용에 따라 커튼·선반·다용도 가구로 공간을 나눠 여러 목적으로 썼어요.'},
+ {k:'stairs', t:'계단 아래 빈 공간에 서랍을 짜 넣는다.', a:'입', why:'계단 밑처럼 평소 안 쓰던 공간을 수납공간으로 — 입체적 활용이에요.'},
+ {k:'movewall', t:'움직이는 벽(가변형 벽체)으로 필요할 때 방 구조를 바꾼다.', a:'다', why:'사용 목적에 따라 공간 구조를 바꿔 여러 용도로 써요 — 다목적 활용.'},
+ {k:'builtin', t:'바닥부터 천장까지 닿는 붙박이장을 짜서 옷과 이불을 넣는다.', a:'입', why:'바닥만이 아니라 천장 가까운 높이까지 수납에 썼어요 — 입체적 활용이에요.'},
+ {k:'sofabed', t:'낮에는 소파, 밤에는 펼쳐서 침대로 쓰는 가구를 둔다.', a:'다', why:'침대가 나오지만 위아래를 쓴 게 아니에요. 다용도 가구로 한 공간을 쉬는 곳·자는 곳으로 — 다목적 활용!'}
+];
+let m1 = null;
+function m1Start(){ m1 = {order:shuffle(CARDS), i:0, correct:0, combo:0, best:0, answered:null, hint:false}; go('m1'); }
+function m1View(){
+  const c = m1.order[m1.i];
+  const steps = m1.order.map((_,j)=>`<span class="${j<m1.i||(j===m1.i&&m1.answered)?'on':''}"></span>`).join('');
+  const showDefs = m1.i<2 || m1.hint;
+  let body;
+  if(m1.answered){
+    const ok = m1.answered===c.a;
+    body = `<div class="fb ${ok?'ok':'no'}"><b>${ok?'정답!':'아쉬워요 — 정답은 「'+(c.a==='다'?'다목적 활용':'입체적 활용')+'」'}</b><br>${c.why}</div>
+      <button class="btn" onclick="m1Next()">${m1.i<m1.order.length-1?'다음 카드 →':'결과 보기 →'}</button>`;
+  } else {
+    body = `<p class="disp" style="font-size:1.2rem;text-align:center">이 마술은 어떤 공간 활용일까?</p>
+    <div class="choice2"><button class="btn a" onclick="m1Ans('다')">다목적 활용</button><button class="btn b" onclick="m1Ans('입')">입체적 활용</button></div>`;
+  }
+  return `${topbar('미션 1 · 공간 마술 카드')}
+  <div class="card">
+    <div class="steps">${steps}</div>
+    <div class="row" style="justify-content:space-between"><span class="combo${m1.combo>=2?' hot':''}">연속 정답 ${m1.combo}</span>
+      ${showDefs||m1.answered?'':`<button class="btn sec small" onclick="m1Hint()">뜻 다시 보기 (연속 정답 0으로)</button>`}</div>
+    ${showDefs?`<div class="defs">
+      <div class="def a"><b>다목적 활용</b>하나의 공간을 여러 목적(용도)으로 쓰기</div>
+      <div class="def b"><b>입체적 활용</b>위·아래·벽처럼 높이의 빈 공간까지 쓰기</div></div>
+      ${m1.i<2&&!m1.hint?'<p class="muted" style="font-size:.9rem">※ 뜻은 2번 카드까지만 보여요. 그다음부터는 스스로!</p>':''}`:''}
+    <div class="scard">${SC[c.k]}<div class="txt">${m1.i+1}. ${c.t}</div></div>
+    ${body}
+  </div>`;
+}
+function m1Hint(){ m1.hint=true; m1.combo=0; render(); }
+function m1Ans(a){ if(m1.answered) return; m1.answered=a; if(a===m1.order[m1.i].a){ m1.correct++; m1.combo++; m1.best=Math.max(m1.best,m1.combo);} else m1.combo=0; render(); }
+function m1Next(){
+  if(m1.i < m1.order.length-1){ m1.i++; m1.answered=null; m1.hint=false; render(); window.scrollTo(0,0); return; }
+  const n = m1.correct, st = n>=8?3:n>=6?2:1;
+  S.m[1] = {score:n, total:m1.order.length, stars:st}; save();
+  showDone(1, `${m1.order.length}장 중 <b>${n}장</b> 정답 · 최고 연속 정답 <b>${m1.best}</b>`, st, '같은 크기의 공간도 <b>다목적</b>·<b>입체적</b>으로 활용하면 활용도가 높아져요.');
+}
+
+/* ================= 미션 2 : 가구 배치 퍼즐 ================= */
+const RULES = [
+ {id:'light', t:'채광, 통풍 등에 방해가 되지 않도록 배치한다.', hint:'키 큰 가구(옷장·책장)가 창문 앞을 막고 있어요.'},
+ {id:'plug',  t:'콘센트나 스위치를 가리지 않도록 배치한다.', hint:'콘센트나 스위치 앞에 가구가 있어요.'},
+ {id:'order', t:'필수적이고 부피가 큰 가구부터 우선 배치한다.', hint:''},
+ {id:'door',  t:'문의 위치와 너비 및 방향을 고려하여 배치한다.', hint:'문이 열리는 자리(분홍 칸)에 가구가 있어요.'},
+ {id:'size',  t:'가구의 높이와 너비, 깊이를 고려하여 배치한다.', hint:'옷장 문을 열거나 책상 의자를 뺄 앞쪽 한 줄이 비어 있어야 해요.'},
+ {id:'path',  t:'동선을 방해하지 않도록 배치한다.', hint:'문에서 걸어가 닿을 수 없는 가구가 있어요. (모든 가구 옆, 옷장·책상 앞까지 길이 있어야 해요)'}
+];
+let m2 = null;
+function m2Start(challenge){ m2 = {cfg:challenge?ROOM2:ROOM1, challenge:!!challenge, placed:{}, sel:null, selFrom:null, rot:false, mistakes:0, orderMiss:0, checks:0, result:null, done:false}; go('m2'); }
+function m2Pick(id){
+  if(m2.done) return;
+  if(m2.placed[id]){ m2.sel = m2.sel===id?null:id; m2.selFrom='board'; render(); return; }
+  const d=FDEF[id];
+  if(!d.big && m2.cfg.furn.some(f=>FDEF[f].big && !m2.placed[f])){
+    m2.orderMiss++; m2.mistakes++;
+    modal(`${say('잠깐! 교과서 97쪽을 떠올려 봐.<br><b>어떤 가구부터</b> 놓아야 할까?')}<p class="muted" style="margin-top:8px">「필수적이고 부피가 큰 가구부터 우선 배치한다.」 — 침대와 옷장을 먼저 놓아 보세요.</p><button class="btn" style="margin-top:12px;width:100%" onclick="closeModal()">알겠어요! 큰 가구부터 놓을게요</button>`);
+    return;
+  }
+  m2.sel = (m2.sel===id && m2.selFrom==='tray') ? null : id;
+  m2.selFrom='tray'; m2.rot=false; render();
+  if(m2.sel) toast(`${d.name}${eul(d.name)} 놓을 칸을 눌러요. 누른 칸이 가구의 왼쪽 위 모서리가 돼요.`);
+}
+function m2Rotate(){
+  if(!m2.sel) return; const id=m2.sel, cfg=m2.cfg;
+  if(m2.placed[id]){
+    const p=m2.placed[id]; const np={c:p.c,r:p.r,w:p.h,h:p.w};
+    if(np.c+np.w>cfg.cols) np.c=cfg.cols-np.w; if(np.r+np.h>cfg.rows) np.r=cfg.rows-np.h;
+    if(np.c<0||np.r<0){ toast('이 방에서는 그 방향으로 돌릴 수 없어요.'); return; }
+    const occ=occMap(m2.placed,id);
+    if(cellsOf(np).some(c=>occ[key(c)])){ toast('돌리면 다른 가구와 겹쳐요. 빈 곳으로 옮긴 뒤 돌려 보세요.'); return; }
+    m2.placed[id]=np;
+  } else { m2.rot=!m2.rot; toast(m2.rot?'가로·세로를 바꿨어요. 이제 칸을 눌러요.':'원래 방향으로 돌렸어요.'); }
+  m2.result=null; render();
+}
+function m2Remove(){ if(m2.sel && m2.placed[m2.sel]){ delete m2.placed[m2.sel]; m2.sel=null; m2.result=null; render(); } }
+function m2Cell(c,r){
+  if(m2.done) return; const cfg=m2.cfg;
+  const occ=occMap(m2.placed,m2.sel);
+  if(!m2.sel){ if(occ[c+','+r]) m2Pick(occ[c+','+r]); else toast('오른쪽에서 가구를 먼저 골라요.'); return; }
+  const d=FDEF[m2.sel]; const cur=m2.placed[m2.sel];
+  let w,h; if(cur){w=cur.w;h=cur.h;} else { w=m2.rot?d.h:d.w; h=m2.rot?d.w:d.h; }
+  if(w>cfg.cols||h>cfg.rows){ toast('이 방향으로는 방에 들어가지 않아요. 돌려 보세요.'); return; }
+  const p={c:Math.min(c,cfg.cols-w), r:Math.min(r,cfg.rows-h), w, h};
+  if(cellsOf(p).some(x=>occ[key(x)])){
+    if(occ[c+','+r] && cur){ m2.sel=occ[c+','+r]; m2.selFrom='board'; render(); return; }
+    toast('다른 가구와 겹쳐요. 다른 칸을 눌러 보세요.'); return;
+  }
+  m2.placed[m2.sel]=p; m2.sel=null; m2.result=null; render();
+}
+function evaluateRoom(cfg, placed){
+  const occ=occMap(placed,null); const res={}, bad={};
+  const mark=(rule,id)=>{ (bad[rule]=bad[rule]||new Set()).add(id); };
+  res.light=true; for(const id in placed){ if(!FDEF[id].tall) continue; if(cellsOf(placed[id]).some(c=>cfg.WIN.some(w=>key(w)===key(c)))){res.light=false;mark('light',id);} }
+  res.plug=true; for(const t of [cfg.OUT,cfg.SW]){ const id=occ[key(t)]; if(id){res.plug=false;mark('plug',id);} }
+  res.order=true;
+  res.door=true; for(const s of cfg.SWING){ const id=occ[key(s)]; if(id){res.door=false;mark('door',id);} }
+  res.size=true; const fronts={};
+  for(const id in placed){ if(!FDEF[id].front) continue;
+    const sides=frontSides(placed[id]).filter(sd=>sd.every(c=>inRoom(cfg,c)&&!occ[key(c)]));
+    if(!sides.length){res.size=false;mark('size',id);} else fronts[id]=sides; }
+  const seen=new Set(); const q=[];
+  for(const s of cfg.SWING) if(!occ[key(s)]){ seen.add(key(s)); q.push(s); }
+  while(q.length){ const [x,y]=q.shift(); for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){ const n=[x+dx,y+dy]; if(inRoom(cfg,n)&&!occ[key(n)]&&!seen.has(key(n))){ seen.add(key(n)); q.push(n);} } }
+  res.path=true;
+  for(const id in placed){ const p=placed[id]; let ok=false;
+    if(fronts[id]) ok = fronts[id].some(sd=>sd.some(c=>seen.has(key(c))));
+    else for(const c of cellsOf(p)) for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){ if(seen.has(key([c[0]+dx,c[1]+dy]))) ok=true; }
+    if(!ok){res.path=false;mark('path',id);} }
+  return {res, bad};
+}
+function m2Check(){
+  if(m2.cfg.furn.some(f=>!m2.placed[f])){ toast(`가구 ${m2.cfg.furn.length}개를 모두 방에 놓은 뒤 검사해요.`); return; }
+  m2.sel=null; m2.checks++;
+  const r=evaluateRoom(m2.cfg,m2.placed); m2.result=r;
+  const pass = RULES.every(x=>r.res[x.id]);
+  if(!pass) m2.mistakes++;
+  render();
+  if(!pass) return;
+  m2.done=true;
+  if(m2.challenge){
+    S.challenge=true; save();
+    setTimeout(()=>modal(`<div style="text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center"><img src="${BOGEUM}" alt="" style="width:110px"><h2>도전 방 성공!</h2><p>좁은 방에 가구 5개를 모두 알맞게 놓았어요. <b>배치 고수 배지</b>를 얻었어요!</p><button class="btn" onclick="go('home')">미션 목록으로</button></div>`),900);
+    return;
+  }
+  const st = m2.mistakes===0?3:m2.mistakes<=2?2:1;
+  S.m[2]={mistakes:m2.mistakes, checks:m2.checks, stars:st}; save();
+  setTimeout(()=>showDone(2, `검사 ${m2.checks}번 만에 6가지 방법을 모두 지켰어요!${m2.orderMiss?` <span class="muted">(순서 실수 ${m2.orderMiss}번)</span>`:''}`, st, '가구를 알맞게 배치하면 <b>동선이 편리</b>해지고 <b>작업 능률</b>도 올라가요.',
+     `<p class="muted" style="font-size:.95rem">먼저 끝낸 사람은 미션 목록에서 <b>도전 방</b>(선택)에 도전할 수 있어요.</p>`), 900);
+}
+function m2View(){
+  const cfg=m2.cfg, occ=occMap(m2.placed,null);
+  const badIds=new Set(); if(m2.result) for(const k in m2.result.bad) m2.result.bad[k].forEach(i=>badIds.add(i));
+  const hit=new Set();
+  if(m2.result){ const rr=m2.result.res;
+    if(!rr.door) cfg.SWING.forEach(s=>{ if(occ[key(s)]) hit.add(key(s)); });
+    if(!rr.plug) [cfg.OUT,cfg.SW].forEach(s=>{ if(occ[key(s)]) hit.add(key(s)); });
+    if(!rr.light) cfg.WIN.forEach(s=>{ const id=occ[key(s)]; if(id&&FDEF[id].tall) hit.add(key(s)); });
+  }
+  const tray=cfg.furn.map(id=>{const f=FDEF[id];
+    return `<button class="titem${m2.sel===id&&m2.selFrom==='tray'?' sel':''}${m2.placed[id]?' used':''}" onclick="m2Pick('${id}')">
+     ${furnSVG(id,f.w,f.h).replace('preserveAspectRatio="none"','preserveAspectRatio="xMidYMid meet"')}
+     <span><span class="tn">${f.name}</span> <span class="mini">${f.w}×${f.h}칸</span><br><span class="ts">${f.tall?'<span class="mini tall">키 큼</span>':''}${f.sub}</span></span></button>`;}).join('');
+  const selName = m2.sel?FDEF[m2.sel].name:'';
+  const ctrl = m2.done?'':`<div class="ctrl">
+     <button class="btn sec small" onclick="m2Rotate()" ${m2.sel?'':'disabled'}>↻ 돌리기${selName?' ('+selName+')':''}</button>
+     <button class="btn sec small" onclick="m2Remove()" ${m2.sel&&m2.placed[m2.sel]?'':'disabled'}>빼기</button>
+     <button class="btn warm" onclick="m2Check()">배치 검사하기</button></div>`;
+  const rules = `<div class="rules">${RULES.map((x,i)=>{ if(!m2.result) return `<div class="rule"><span class="ic">${i+1}</span><span>${x.t}</span></div>`;
+     const ok=m2.result.res[x.id]; return `<div class="rule ${ok?'ok':'no'}"><span class="ic">${ok?'✓':'!'}</span><span>${i+1}. ${x.t}${ok?'':`<small>${x.hint}</small>`}</span></div>`;}).join('')}</div>`;
+  return `${topbar(m2.challenge?'도전 방 · 좁은 방 배치':'미션 2 · 가구 배치 퍼즐')}
+  <div class="card">
+    ${say(m2.challenge?'이번엔 더 좁은 방! 문은 위쪽, 창문은 아래쪽이야. <b>가구 5개</b>를 6가지 방법에 맞게 놓아 줘.':'이사 온 내 방이야! 가구 4개를 놓아 줘.<br><b>교과서 97쪽 「효율적인 가구 배치 방법」 6가지</b>를 모두 지키면 성공!', true)}
+    <p class="muted" style="font-size:.95rem">가구를 고르고 → 방의 칸을 누르면 놓여요. 놓인 가구를 누르면 옮기기·돌리기·빼기를 할 수 있어요. <span style="color:#C8463F">분홍 칸 = 문이 열리는 자리</span></p>
+    <div class="m2grid">
+      <div>${roomHTML(cfg, m2.placed, {sel:m2.sel, bad:badIds, hit, onCell:'m2Cell', onPiece:'m2Pick'})}</div>
+      <div class="tray">${tray}</div>
+    </div>
+    ${ctrl}
+    ${rules}
+  </div>`;
+}
+
+/* ================= 미션 3 : 정리왕 선반 ================= */
+const LEVELS = [
+ {n:'맨 위 칸', t:'크고 가벼우며 가끔 사용하는 것'},
+ {n:'둘째 칸', t:'가볍고 자주 사용하는 것'},
+ {n:'셋째 칸', t:'가장 많이 사용하는 것'},
+ {n:'맨 아래 칸', t:'무거우며 가끔 사용하는 것'}
+];
+const ITEMS = [
+ {k:'books', name:'교과서와 필통', sit:'학교 가기 전에도, 숙제할 때도… <b>하루 종일 몇 번이고</b> 꺼내요.', a:2, why:'하루 종일 몇 번이고 꺼내는 물건 = 가장 많이 쓰는 물건. 손이 가장 편하게 닿는 셋째 칸!'},
+ {k:'quilt', name:'겨울 솜이불', sit:'부피는 크지만 들어 보면 의외로 가벼워요. 한겨울에만 덮어요.', a:0, why:'크고 가볍고 가끔 쓰니 맨 위 칸. 가벼워서 높은 데서 꺼내도 위험하지 않아요.'},
+ {k:'dumbbell', name:'아령 두 개', sit:'들면 묵직해요. 운동하겠다고 사 놓고 생각날 때만 가끔 써요.', a:3, why:'무거운 물건이 위에 있으면 꺼내다 떨어뜨려 다칠 수 있어요. 무겁고 가끔 → 맨 아래 칸!'},
+ {k:'tissue', name:'티슈 상자', sit:'가볍고 작아요. 자주 쓰지만, 필통만큼 하루 종일 쓰지는 않아요.', a:1, why:'가볍고 자주 쓰는 물건은 둘째 칸. 손을 조금 뻗으면 닿아요. 가장 편한 셋째 칸은 가장 많이 쓰는 물건에게!'},
+ {k:'cup', name:'물병과 컵', sit:'물 마실 때마다 꺼내요. <b>하루 종일 몇 번이고!</b>', a:2, why:'가장 많이 쓰는 물건 — 셋째 칸이 정답!'},
+ {k:'toolbox', name:'공구함', sit:'쇠로 된 공구가 들어 있어 무거워요. 뭔가 고장 났을 때만 꺼내요.', a:3, why:'무겁고 가끔 쓰니 맨 아래 칸이 안전해요.'}
+];
+function m3Hint(itemLv, chosen){
+  if(itemLv===3) return chosen===0||chosen===1 ? '<b>무게</b>를 다시 봐요! 무거운 물건을 높이 두면 꺼내다 떨어뜨릴 수 있어요.' : '<b>얼마나 자주</b> 쓰는지 다시 봐요. 가끔 쓰는 물건이 손 닿기 가장 좋은 칸을 차지하면 아까워요.';
+  if(itemLv===0) return chosen===3 ? '<b>무게</b>를 다시 봐요. 가벼운 물건이 아래 칸을 차지하면 무거운 물건 둘 곳이 없어요.' : '<b>얼마나 자주</b> 쓰는지 다시 봐요. 가끔 쓰는 큰 물건은 손 닿기 좋은 칸을 비워 줘야 해요.';
+  if(itemLv===2) return chosen===1 ? '<b>사용 빈도</b>를 다시 봐요. 하루에도 몇 번씩 쓰는 물건이에요. 손이 가장 편하게 닿는 칸은 어디일까?' : '<b>자주 쓰는 물건</b>인데 꺼내기 힘든 칸이에요. 까치발도, 허리 굽히기도 없이 닿는 칸은?';
+  return chosen===2 ? '<b>사용 빈도</b>를 다시 봐요. 자주 쓰긴 하지만 「가장 많이」는 아니에요. 가장 편한 칸은 하루에도 몇 번씩 쓰는 물건에게!' : '<b>자주 쓰는 물건</b>인데 꺼내기 힘든 칸이에요. 손을 조금만 뻗으면 닿는 칸은?';
+}
+let m3=null;
+function m3Start(){ m3={i:0, correct:0, tried:false, wrongLv:null, placed:[[],[],[],[]], msg:null, done:false}; go('m3'); }
+function m3Pick(lv){
+  if(m3.done) return;
+  const it=ITEMS[m3.i];
+  if(lv===it.a){
+    if(!m3.tried) m3.correct++;
+    m3.placed[lv].push(it.k);
+    m3.msg={ok:true, txt:`<b>정답!</b> ${it.why}`};
+    m3.i++; m3.tried=false; m3.wrongLv=null;
+    if(m3.i>=ITEMS.length){
+      m3.done=true; render();
+      const n=m3.correct, st=n>=6?3:n>=4?2:1;
+      S.m[3]={score:n,total:ITEMS.length,stars:st}; save();
+      setTimeout(()=>showDone(3, `${ITEMS.length}개 중 <b>${n}개</b>를 한 번에 맞혔어요!`, st,
+        `<b>교과서 97쪽 선반 정리 원칙</b><br>${LEVELS.map(L=>`· ${L.n}: ${L.t}`).join('<br>')}<br>사용자의 <b>눈높이·인체 치수</b>, 물건의 <b>특성과 용도</b>, <b>사용 빈도</b>를 생각해 수납 위치를 정해요.`), 1100);
+      return;
+    }
+  } else if((it.a===1&&lv===2)||(it.a===2&&lv===1)){
+    m3.wrongLv=lv;
+    m3.msg={ok:false, txt:`<b>아깝다! (실수 아님)</b> ${it.a===1?'자주 쓰긴 해요. 그런데 「가장 많이」 쓰는 물건일까? 설명을 다시 읽어 봐요.':'자주 쓰는 정도가 아니라 하루 종일 몇 번이고 쓰는 물건이에요.'}`};
+  } else {
+    m3.tried=true; m3.wrongLv=lv;
+    m3.msg={ok:false, txt:`<b>다시 생각해 봐요.</b> ${m3Hint(it.a, lv)}`};
+  }
+  render();
+}
+function m3View(){
+  const it=ITEMS[Math.min(m3.i,ITEMS.length-1)];
+  const steps=ITEMS.map((_,j)=>`<span class="${j<m3.i?'on':''}"></span>`).join('');
+  const lv=LEVELS.map((L,i)=>`<button class="lvl${m3.wrongLv===i?' wrong':''}" onclick="m3Pick(${i})"><span class="ln">${L.n}</span>${m3.done?`<span class="lt">${L.t}</span>`:''}<span class="itemrow">${m3.placed[i].map(k=>IT[k]).join('')}</span></button>`).join('');
+  const cur = !m3.done ? `<div class="item">${IT[it.k]}<div style="display:flex;flex-direction:column;gap:6px"><span class="iname">${m3.i+1}. ${it.name}</span><span class="isit">${it.sit}</span></div></div>
+     <p class="disp" style="font-size:1.15rem">이 물건은 선반 어느 칸에 둘까? 칸을 눌러요.</p>` : `<p class="disp" style="font-size:1.3rem">모두 정리했어요!</p>`;
+  return `${topbar('미션 3 · 정리왕 선반')}
+  <div class="card">
+    <div class="steps">${steps}</div>
+    ${say('물건마다 알맞은 자리가 있어! 설명을 잘 읽고 <b>무게·크기·얼마나 자주 쓰는지</b>를 따져 봐.', true)}
+    <div class="m3grid">
+      <div style="display:flex;flex-direction:column;gap:12px">${cur}${m3.msg?`<div class="fb ${m3.msg.ok?'ok':'no'}">${m3.msg.txt}</div>`:''}</div>
+      <div class="shelfwrap">
+        <div class="ruler"><div>까치발을 해야 닿음</div><div>손을 뻗으면 닿음</div><div class="reach">눈높이 아래 ~ 손끝 (가장 편함)</div><div>허리를 굽혀야 함</div></div>
+        <div class="shelf">${lv}</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ================= 최종 보스 : 동생 방 구조대 ================= */
+/* 잘못된 곳 5군데: 방 3(창문 앞 책장·문 앞 협탁·스위치 가린 책상) + 선반 2(맨 위 공구함·맨 아래 교과서)
+   함정(잘 놓인 것): 침대, 콘센트 바로 옆 옷장(가리지 않음), 이불·티슈·컵·아령 */
+const BOSS_START = { bed:{c:1,r:0,w:2,h:4}, ward:{c:3,r:0,w:3,h:1}, shelf:{c:0,r:1,w:1,h:2}, desk:{c:2,r:5,w:2,h:1}, drawer:{c:4,r:4,w:1,h:1} };
+const BOSS_ROOM = {
+ shelf: {rule:'light', alt:'size', altMsg:'맞는 말이에요! 키가 높은 게 문제죠. 그런데 키 큰 가구가 <b>창문 앞</b>을 막으면 무엇이 방해될까? (실수 아님)', to:{c:0,r:4,w:1,h:2}, hint:'책장 바로 옆 벽에 무엇이 있는지, 책장의 키가 어떤지 다시 봐요.', done:'키 큰 책장이 창문을 막아 채광·통풍을 방해했어요 → 창문 없는 구석으로 옮겼어요.'},
+ drawer:{rule:'door', alt:'path', to:{c:3,r:3,w:1,h:1}, hint:'협탁이 놓인 자리에 점선 호(문이 열리는 길)가 지나가요.', altMsg:'맞는 말이에요! 그런데 문 바로 앞 가구라면 교과서의 어떤 방법이 더 딱 맞을까? (실수 아님)', done:'문이 열리는 자리를 막았어요 → 문의 위치·너비·방향을 생각해 침대 옆으로 옮겼어요.'},
+ desk:  {rule:'plug', to:{c:5,r:2,w:1,h:2}, hint:'책상 바로 뒤 벽에 있는 노란 표시를 봐요.', done:'책상이 스위치를 가렸어요 → 콘센트·스위치를 가리지 않는 자리로 옮겼어요.'},
+ bed:   {ok:'침대는 창문 근처지만 키가 낮아 채광을 막지 않고, 문·스위치와도 떨어져 있어요. 잘 놓였어요!'},
+ ward:  {ok:'옷장은 콘센트 바로 옆이지만 가리지는 않아요. 앞쪽에 문을 열 공간도 있어요. 잘 놓였어요!'}
+};
+const BOSS_SHELF_START = [[{k:'quilt'},{k:'toolbox'}],[{k:'tissue'}],[{k:'cup'}],[{k:'books'},{k:'dumbbell'}]];
+const BOSS_SHELF = {
+ toolbox:{to:3, hint:'공구함은 무겁고, 고장 났을 때만 써요.'},
+ books:{to:2, hint:'교과서와 필통은 매일, 하루에도 몇 번씩 꺼내요.'}
+};
+const ITEM_NAME = {quilt:'겨울 이불', toolbox:'공구함', tissue:'티슈 상자', cup:'물병과 컵', books:'교과서와 필통', dumbbell:'아령'};
+const SHELF_OK = {quilt:'크고 가벼우며 가끔 쓰는 이불 — 맨 위 칸이 맞아요.', tissue:'가볍고 자주 쓰는 티슈 — 둘째 칸이 맞아요.', cup:'가장 많이 쓰는 컵 — 셋째 칸이 맞아요.', dumbbell:'무겁고 가끔 쓰는 아령 — 맨 아래 칸이 맞아요.'};
+const BOSS_ITEMS = [
+ {k:'floorbox', t:'옷장 옆 바닥에 상자를 쌓아 둔다', ok:false, why:'바닥에 짐을 쌓으면 동선을 막고 방이 더 좁아져요.'},
+ {k:'underbed', t:'침대 밑에 서랍을 넣는다', ok:true},
+ {k:'doortop', t:'문 위에 선반을 단다', ok:true}
+];
+const BOSS_TOTAL = 5;
+let m4=null, m4Pending=null;
+function m4Start(){
+  // 중간에 나갔다 다시 들어와도 실수 수와 시작 시각은 이어서 센다 (다시 시작으로 점수 올리기 방지)
+  if(!S.boss) { S.boss={start:Date.now(), mistakes:0}; save(); }
+  m4={stage:'find', placed:JSON.parse(JSON.stringify(BOSS_START)), shelf:JSON.parse(JSON.stringify(BOSS_SHELF_START)), fixed:new Set(), item:null, wrongItems:new Set(), wrongTerm:new Set()};
+  go('m4');
+}
+function miss(){ S.boss.mistakes++; save(); }
+function m4Progress(){ if(m4.stage==='done') return 100; let p=40+m4.fixed.size*10; if(m4.stage==='term') p+=5; return p; }
+function m4Piece(id){
+  if(m4.stage!=='find') return;
+  if(m4.fixed.has(id)){ toast('이미 고쳤어요!'); return; }
+  const f=BOSS_ROOM[id];
+  if(f.ok){ miss(); render(); toast(`${f.ok} (실수 +1)`, 3400); return; }
+  m4Pending={type:'room', id, f, wrong:new Set()}; m4RuleRender();
+}
+function m4RuleRender(msg, ok){
+  const P=m4Pending;
+  modal(`<p class="muted">${FDEF[P.id].name}${P.id==='drawer'?' — 침대 옆에 두는 작은 서랍장':''}</p><h2 style="font-size:1.3rem">이 ${FDEF[P.id].name}${eun(FDEF[P.id].name)} 교과서 97쪽 배치 방법 중 <b>무엇을 어겼을까?</b></h2>
+   <div class="opts">${RULES.map((r,j)=>`<button class="opt${P.wrong.has(r.id)?' wrong':''}" ${P.wrong.has(r.id)?'disabled':''} onclick="m4Rule('${r.id}')">${j+1}. ${r.t}</button>`).join('')}</div>
+   ${msg?`<div class="fb ${ok?'ok':'no'}">${msg}</div>`:''}<button class="btn sec small" onclick="closeModal()">다른 곳 먼저 볼게요</button>`);
+}
+function m4Rule(rid){
+  const P=m4Pending, f=P.f;
+  if(rid===f.rule){
+    m4.placed[P.id]=f.to; m4.fixed.add(P.id); closeModal(); m4After(f.done); return;
+  }
+  if(f.alt && rid===f.alt){ m4RuleRender(f.altMsg, true); return; }
+  P.wrong.add(rid); miss(); m4RuleRender(`<b>아니에요.</b> 힌트: ${f.hint}`);
+}
+function m4Item(k){
+  if(m4.stage!=='find') return;
+  if(m4.fixed.has(k)){ toast('이미 고쳤어요!'); return; }
+  const f=BOSS_SHELF[k];
+  if(!f){ miss(); render(); toast(`${SHELF_OK[k]} (실수 +1)`, 3400); return; }
+  m4Pending={type:'shelf', id:k, f, wrong:new Set()}; m4LvRender();
+}
+function m4LvRender(msg){
+  const P=m4Pending, cur=m4.shelf.findIndex(l=>l.some(x=>x.k===P.id));
+  modal(`<div class="row" style="flex-wrap:nowrap"><div style="width:72px;flex:none">${IT[P.id]}</div><h2 style="font-size:1.3rem">${ITEM_NAME[P.id]}, <b>어느 칸으로 옮길까?</b></h2></div>
+   <div class="opts">${LEVELS.map((L,j)=>`<button class="opt${P.wrong.has(j)?' wrong':''}" ${P.wrong.has(j)||j===cur?'disabled':''} style="${j===cur?'opacity:.45':''}" onclick="m4Lv(${j})">${L.n}${j===cur?' (지금 자리)':''}</button>`).join('')}</div>
+   ${msg?`<div class="fb no">${msg}</div>`:''}<button class="btn sec small" onclick="closeModal()">다른 곳 먼저 볼게요</button>`);
+}
+function m4Lv(j){
+  const P=m4Pending;
+  if(j===P.f.to){ const k=P.id; m4.shelf=m4.shelf.map(l=>l.filter(x=>x.k!==k)); m4.shelf[j].push({k}); m4.fixed.add(k); closeModal(); m4After(`${ITEM_NAME[k]}${eul(ITEM_NAME[k])} ${LEVELS[j].n}으로 옮겼어요. (${LEVELS[j].t})`); return; }
+  P.wrong.add(j); miss(); m4LvRender(`<b>아니에요.</b> 힌트: ${P.f.hint}`);
+}
+function m4After(msg){
+  if(m4.fixed.size>=BOSS_TOTAL) m4.stage='item';
+  render(); toast(msg, 3200);
+}
+function m4PickItem(i){
+  const it=BOSS_ITEMS[i];
+  if(!it.ok){ m4.wrongItems.add(i); miss(); render(); toast(`${it.why} (실수 +1)`, 3200); return; }
+  m4.item=i; m4.stage='term'; render();
+}
+const TERMS=[{id:'다',t:'공간의 다목적 활용'},{id:'구',t:'공간의 구역화'},{id:'입',t:'공간의 입체적 활용'}];
+function m4Term(a){
+  if(a!=='입'){ m4.wrongTerm.add(a); miss(); render(); toast(a==='구'?'구역화는 성격이 비슷한 공간끼리 묶는 것(지난 시간)이에요. (실수 +1)':'다목적 활용은 한 공간을 여러 용도로 쓰는 것이에요. (실수 +1)', 3400); return; }
+  m4.stage='done';
+  const end=Date.now();
+  const score=Math.max(50,100-5*S.boss.mistakes);
+  S.m[4]={score, mistakes:S.boss.mistakes, time:end-S.boss.start, item:BOSS_ITEMS[m4.item].t}; S.end=end; save();
+  render();
+  setTimeout(()=>go('report'),1300);
+}
+function m4View(){
+  const prog=m4Progress();
+  let lower='';
+  if(m4.stage==='find'){
+    lower = `<p class="disp" style="font-size:1.15rem">잘못된 곳 <b>${BOSS_TOTAL}군데</b>를 찾아 눌러요. (찾은 곳 ${m4.fixed.size} / ${BOSS_TOTAL})</p>
+     <p class="muted" style="font-size:.93rem">방의 가구와 선반의 물건을 눌러 보세요. <b>잘 놓인 것을 누르거나 틀리게 고르면 실수 1번 (−5점)</b>. 수상해 보여도 괜찮은 것이 숨어 있어요!</p>`;
+  } else if(m4.stage==='item'){
+    lower = `${say('고마워! 그런데 상자 세 개가 아직 남았어. 바닥은 이제 꽉 찼고… <b>어떻게 하면 좋을까?</b>', true)}
+     <div class="pick3">${BOSS_ITEMS.map((it,i)=>`<button class="${m4.wrongItems.has(i)?'wrong':''}" ${m4.wrongItems.has(i)?'disabled':''} onclick="m4PickItem(${i})">${SC[it.k]}${it.t}</button>`).join('')}</div>`;
+  } else if(m4.stage==='term'){
+    lower = `<div class="fb ok"><b>좋은 선택!</b> 「${BOSS_ITEMS[m4.item].t}」</div>
+     <p class="disp" style="font-size:1.2rem;text-align:center">마지막 질문! 네가 고른 방법은 무엇일까?</p>
+     <div class="opts">${TERMS.map(t=>`<button class="opt${m4.wrongTerm.has(t.id)?' wrong':''}" ${m4.wrongTerm.has(t.id)?'disabled':''} onclick="m4Term('${t.id}')">${t.t}</button>`).join('')}</div>`;
+  } else {
+    lower = `<div class="fb ok"><b>동생 방 구조 완료!</b> 리포트를 만들고 있어요…</div>`;
+  }
+  const shelf = `<div class="shelfwrap"><div class="shelf">${LEVELS.map((L,i)=>`<div class="lvl" style="min-height:80px"><span class="ln">${L.n}</span><span class="itemrow">${m4.shelf[i].map(x=>`<button class="${m4.fixed.has(x.k)?'fixed':''}" onclick="m4Item('${x.k}')" aria-label="${ITEM_NAME[x.k]}">${IT[x.k]}</button>`).join('')}</span></div>`).join('')}</div></div>`;
+  return `${topbar('최종 보스 · 동생 방 구조대')}
+  <div class="card">
+    ${m4.stage==='find'?say('큰일이야! 내 동생 방이 엉망이래. 방 구조는 <b>내 방과 똑같아</b>. 오늘 배운 걸로 고쳐 줄래? <b>기회는 한 번뿐</b>이야!', true):''}
+    <div><div class="row" style="justify-content:space-between"><span class="disp">방 상태</span><span class="disp">${prog}% · 실수 ${S.boss.mistakes}</span></div><div class="meter"><span style="width:${prog}%"></span></div></div>
+    <div class="bossgrid">
+      <div>${roomHTML(ROOM1, m4.placed, {fixed:m4.fixed, onPiece:'m4Piece', noSwing:true})}</div>
+      <div><p class="disp" style="margin-bottom:6px">동생의 벽 선반</p>${shelf}</div>
+    </div>
+    ${lower}
+  </div>`;
+}
+
+/* ================= 결과 ================= */
+function showDone(n, line, st, lesson, extra){
+  modal(`<div style="text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center">
+    <img src="${BOGEUM}" alt="" style="width:110px"><h2>미션 ${n} 완료!</h2>
+    <div style="font-size:2rem;color:#E0A100;letter-spacing:4px">${starStr(st)}</div>
+    <p>${line}</p><div class="fb ok" style="text-align:left">${lesson}</div>
+    <button class="btn" onclick="go('home')">미션 목록으로</button>${extra||''}</div>`);
+}
+function fmtTime(ms){ const s=Math.max(0,Math.round(ms/1000)); return `${Math.floor(s/60)}분 ${s%60}초`; }
+function reportView(){
+  const B=S.m[4];
+  return `<div class="card report">
+    <img src="${BOGEUM}" alt="" style="width:110px">
+    <span class="tag">동생 방 구조 리포트</span>
+    <p class="disp" style="font-size:1.3rem">${esc(S.who.cls)}반 ${esc(S.who.no)}번 ${esc(S.who.name)}</p>
+    <div class="row" style="justify-content:center;gap:28px">
+      <div><div class="big">${B.score}점</div><p class="muted">보스 점수 (실수 ${B.mistakes}번)</p></div>
+      <div><div class="big" style="font-size:2.4rem;color:#2F7D5E">${fmtTime(B.time)}</div><p class="muted">보스 기록 시간</p></div>
+    </div>
+    <p class="muted" style="font-size:.92rem">베스트 문제왕: 점수가 높은 사람 → 같으면 보스 기록 시간이 짧은 사람</p>
+    <table>
+      <tr><td>미션 1 공간 마술 카드</td><td>${S.m[1]?starStr(S.m[1].stars):'-'}</td></tr>
+      <tr><td>미션 2 가구 배치 퍼즐</td><td>${S.m[2]?starStr(S.m[2].stars):'-'}</td></tr>
+      <tr><td>미션 3 정리왕 선반</td><td>${S.m[3]?(S.m[3].skipped?'건너뜀':starStr(S.m[3].stars)):'-'}</td></tr>
+      <tr><td>도전 방</td><td>${S.challenge?'배치 고수 배지':'—'}</td></tr>
+    </table>
+    <div class="fb ok" style="text-align:left;max-width:540px">고친 것: 창문 앞 책장(채광·통풍) · 문 앞 협탁(문) · 스위치 가린 책상(콘센트·스위치) · 맨 위 공구함 → 맨 아래 · 맨 아래 교과서 → 셋째 칸<br>더 넓힌 방법: ${esc(B.item)} (입체적 활용)</div>
+  </div>
+  <div class="card">${say('이 화면을 선생님께 보여 줘! 그리고 <b>우리 집에서 바로 해 볼 한 가지</b>를 생각해 봐.', true)}
+   <button class="btn sec" onclick="go('home')">미션 목록 보기</button></div>`;
+}
+/* ================= 시작 · 목록 ================= */
+function introView(){
+  return `<div class="card hero">
+    <span class="tag">교과서 96~97쪽 · 주거 공간의 효율적 활용</span>
+    <h1>보금이의 방 대변신</h1>
+    <div class="heroart">${SC.loft}</div>
+    ${say('작은 방으로 이사 왔어! 그런데 <b>크기와 구조가 같아도</b> 공간 활용·가구 배치·정리와 수납 방법에 따라 훨씬 넓게 쓸 수 있대. 도와줄래?')}
+    <div class="fields">
+      <label>반<input id="cls" inputmode="numeric" maxlength="2" placeholder="예: 3"></label>
+      <label>번호<input id="no" inputmode="numeric" maxlength="2" placeholder="예: 12"></label>
+      <label>이름<input id="nm" maxlength="10" placeholder="이름"></label>
+    </div>
+    <button class="btn" style="font-size:1.4rem;padding:14px 34px" onclick="enter()">시작하기</button>
+    <button class="btn sec small" style="opacity:.6" onclick="teacher()">선생님</button>
+  </div>`;
+}
+function enter(){
+  const cls=$('#cls').value.trim(), no=$('#no').value.trim(), nm=$('#nm').value.trim();
+  if(!cls||!no||!nm){ toast('반, 번호, 이름을 모두 적어요.'); return; }
+  S=fresh(); S.who={cls,no,name:nm}; S.start=Date.now(); save(); go('home');
+}
+function homeView(){
+  const M=[
+    {n:1, cls:'m1', t:'공간 마술 카드', p:'다목적 활용? 입체적 활용? 카드 9장 · 연속 정답에 도전!', fn:'m1Start()'},
+    {n:2, cls:'m2', t:'가구 배치 퍼즐', p:'가구 4개를 놓아 배치 방법 6가지를 모두 지켜요.', fn:'m2Start()'},
+    {n:3, cls:'m3', t:'정리왕 선반', p:'설명을 읽고 물건 6개를 알맞은 칸에 정리해요.', fn:'m3Start()'},
+    {n:4, cls:'m4', t:'최종 보스 · 동생 방 구조대', p:'엉망인 방에서 잘못된 곳 5군데를 찾아 고쳐요. 기회는 한 번!', fn:'m4Start()'}
+  ];
+  const unlocked=n=> n===1 || !!S.m[n-1];
+  const cards=M.map(m=>{
+    const done=!!S.m[m.n], lock=!unlocked(m.n);
+    const st= done ? (m.n<4?(S.m[m.n].skipped?'건너뜀':starStr(S.m[m.n].stars)):`${S.m[4].score}점`) : '';
+    const act = (m.n===4&&done) ? "go('report')" : m.fn;
+    return `<button class="mission ${m.cls}${done?' done':''}${lock?' locked':''}" ${lock?'disabled':''} onclick="${act}">
+      <span class="num">${m.n<4?'미션 '+m.n:'최종'}${lock?' · 앞 미션을 끝내면 열려요':''}</span><span class="mt">${m.t}</span><span class="mp">${m.p}</span><span class="stars">${st}</span></button>`;
+  }).join('');
+  const skip = (S.m[2] && !S.m[3]) ? `<button class="btn sec small" onclick="if(confirm('선생님이 허락했나요? 미션 3을 건너뛰면 미션 3 별은 0개예요.')){S.m[3]={score:0,total:6,stars:0,skipped:true};save();render();}">선생님이 허락하면: 미션 3 건너뛰고 최종 보스로</button>` : '';
+  const ch = S.m[2] ? `<button class="btn warm small" onclick="m2Start(true)">${S.challenge?'도전 방 다시 하기 (배지 획득!)':'도전 방 · 먼저 끝낸 사람 (선택)'}</button>` : '';
+  return `<div class="top"><h2>보금이의 방 대변신</h2><span class="who">${esc(S.who.cls)}반 ${esc(S.who.no)}번 ${esc(S.who.name)}</span></div>
+   ${say(S.m[4]?'모두 완료! 리포트를 다시 보려면 최종 보스를 눌러.':'미션을 차례대로 해결해 줘. 끝낸 미션은 다시 도전할 수 있어(별은 새 기록으로 바뀌어).', true)}
+   <div class="missions">${cards}</div>${(ch||skip)?`<div class="row">${ch}${skip}</div>`:''}`;
+}
+function teacher(){
+  modal(`<h2>선생님 메뉴</h2><p>이 기기의 기록을 지우고 처음 화면으로 돌아갑니다. 초기화 코드를 입력하세요.</p>
+   <input id="rc" inputmode="numeric" maxlength="6" placeholder="초기화 코드" style="margin-top:6px">
+   <div class="row" style="margin-top:12px"><button class="btn warm" onclick="doReset()">초기화</button><button class="btn sec" onclick="closeModal()">취소</button></div>`);
+}
+function doReset(){ if(($('#rc')||{}).value===RESET_CODE){ try{localStorage.removeItem(KEY);}catch(e){} S=fresh(); closeModal(); go('intro'); toast('초기화했어요.'); } else toast('코드가 달라요.'); }
+function modal(html){ closeModal(); const d=document.createElement('div'); d.className='modalbg'; d.id='modal'; d.innerHTML=`<div class="card modal">${html}</div>`; d.addEventListener('click',e=>{ if(e.target===d) closeModal(); }); document.body.appendChild(d); }
+function closeModal(){ const m=$('#modal'); if(m) m.remove(); }
+function render(){
+  const app=$('#app');
+  if(!S.who){ app.innerHTML=introView(); return; }
+  if(view==='m1'&&m1) app.innerHTML=m1View();
+  else if(view==='m2'&&m2) app.innerHTML=m2View();
+  else if(view==='m3'&&m3) app.innerHTML=m3View();
+  else if(view==='m4'&&m4) app.innerHTML=m4View();
+  else if(view==='report'&&S.m[4]) app.innerHTML=reportView();
+  else { view='home'; app.innerHTML=homeView(); }
+}
+render();
+</script>
+</body></html>
