@@ -833,7 +833,8 @@ function homeView(){
   const ch = S.m[2] ? `<button class="btn warm small" onclick="m2Start(true)">${S.challenge?'도전 방 다시 하기 (배지 획득!)':'도전 방 · 먼저 끝낸 사람 (선택)'}</button>` : '';
   return `<div class="top"><h2>보금이의 방 대변신</h2><span class="who">${esc(S.who.cls)}반 ${esc(S.who.no)}번 ${esc(S.who.name)}</span></div>
    ${say(S.m[4]?'모두 완료! 리포트를 다시 보려면 최종 보스를 눌러.':'미션을 차례대로 해결해 줘. 끝낸 미션은 다시 도전할 수 있어(별은 새 기록으로 바뀌어).', true)}
-   <div class="missions">${cards}</div>${(ch||skip)?`<div class="row">${ch}${skip}</div>`:''}`;
+   <div class="missions">${cards}</div>${(ch||skip)?`<div class="row">${ch}${skip}</div>`:''}
+   <div style="text-align:right"><button class="btn sec small" style="opacity:.55" onclick="teacher()">선생님</button></div>`;
 }
 function teacher(){
   modal(`<h2>선생님 메뉴</h2><p>이 기기의 기록을 지우고 처음 화면으로 돌아갑니다. 초기화 코드를 입력하세요.</p>
